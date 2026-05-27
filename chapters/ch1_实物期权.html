@@ -2822,15 +2822,114 @@
     margin-right: 6px !important;
   }
 
+  /* ╔══════════════════════════════════════════════╗
+     ║         暗色模式（覆盖 print-preview 白底）    ║
+     ╚══════════════════════════════════════════════╝ */
+  html[data-theme="dark"] body.print-preview {
+    background: #14110d;
+  }
+  html[data-theme="dark"] body.print-preview .layout {
+    background: #1f1b15 !important;
+    color: #e8dfca !important;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.7);
+  }
+  html[data-theme="dark"] body.print-preview main,
+  html[data-theme="dark"] body.print-preview main *:not(mjx-container):not(mjx-container *) {
+    color: #e8dfca !important;
+  }
+  html[data-theme="dark"] body.print-preview mjx-container,
+  html[data-theme="dark"] body.print-preview mjx-container * {
+    color: #e8dfca !important;
+  }
+  html[data-theme="dark"] body.print-preview .chapter-title,
+  html[data-theme="dark"] body.print-preview h2.sec {
+    border-color: #5a5444 !important;
+  }
+  html[data-theme="dark"] body.print-preview h2.sec .num {
+    background: #e8dfca !important;
+    color: #1f1b15 !important;
+  }
+  html[data-theme="dark"] body.print-preview .problem-panel {
+    background: #2a251d !important;
+  }
+  html[data-theme="dark"] body.print-preview .problem-panel .ptag {
+    background: #e8dfca !important;
+    color: #1f1b15 !important;
+  }
+  html[data-theme="dark"] body.print-preview .problem-panel .stem .k {
+    color: #d4a857 !important;
+    border-bottom-color: #5a4920 !important;
+  }
+  html[data-theme="dark"] body.print-preview .qhead {
+    border-left-color: #e8dfca !important;
+  }
+  html[data-theme="dark"] body.print-preview .qhead .qnum {
+    background: transparent !important;
+    border-color: #9a948a !important;
+    color: #e8dfca !important;
+  }
+  html[data-theme="dark"] body.print-preview .qblock {
+    border-bottom-color: #3a3530 !important;
+  }
+  html[data-theme="dark"] body.print-preview .hint {
+    background: #2a251d !important;
+  }
+  html[data-theme="dark"] body.print-preview .hint::before {
+    color: #c5bfa3 !important;
+  }
+  html[data-theme="dark"] body.print-preview .mistake-box {
+    background: #3a2820 !important;
+  }
+  html[data-theme="dark"] body.print-preview .mistake-box,
+  html[data-theme="dark"] body.print-preview .mistake-box * {
+    color: #e0a080 !important;
+  }
+  html[data-theme="dark"] body.print-preview .score-box {
+    background: #2e2820 !important;
+  }
+  html[data-theme="dark"] body.print-preview .score-box,
+  html[data-theme="dark"] body.print-preview .score-box * {
+    color: #d4a857 !important;
+  }
+  html[data-theme="dark"] body.print-preview .todo {
+    background: #2e2b27 !important;
+    border-color: #5a5444 !important;
+  }
+  html[data-theme="dark"] body.print-preview pre.tree,
+  html[data-theme="dark"] body.print-preview .eq {
+    background: #2a251d !important;
+  }
+  html[data-theme="dark"] body.print-preview table th,
+  html[data-theme="dark"] body.print-preview table td {
+    border-color: #3a3530 !important;
+  }
+  html[data-theme="dark"] body.print-preview table.summary tr.hl td {
+    background: #2e2b27 !important;
+  }
+  /* 预览栏在暗色下保持原棕底（已经是深色），无需改动 */
+
+  /* 打印时强制回白，不受暗色影响 */
+  @media print {
+    html[data-theme="dark"] body.print-preview,
+    html[data-theme="dark"] body.print-preview .layout {
+      background: #fff !important;
+    }
+    html[data-theme="dark"] body.print-preview main,
+    html[data-theme="dark"] body.print-preview main *:not(mjx-container):not(mjx-container *),
+    html[data-theme="dark"] body.print-preview mjx-container,
+    html[data-theme="dark"] body.print-preview mjx-container * {
+      color: #000 !important;
+    }
+  }
+
 </style>
 </head>
 <body class="print-preview print-color">
 <div class="preview-bar">
-  打印样式：
-  <button type="button" class="mode-btn" id="colorModeBtn">彩印</button>
-  <button type="button" class="mode-btn" id="bwModeBtn">黑白</button>
+  阅读模式：
+  <button type="button" class="mode-btn" id="lightModeBtn">明亮</button>
+  <button type="button" class="mode-btn" id="darkModeBtn">暗色</button>
   <button type="button" class="mode-btn pdf-btn" id="pdfExportBtn">导出 PDF</button>
-  <span class="mode-hint">彩印只保留少量重点色；黑白适合普通打印。</span>
 </div>
 <div class="layout">
 <main>
@@ -3024,34 +3123,28 @@ t=0         t=1（确定收30万，再决策）          t=2 ~ t=10
 </main>
 </div>
 <script>
-  const colorModeBtn = document.getElementById("colorModeBtn");
-  const bwModeBtn = document.getElementById("bwModeBtn");
+  const lightModeBtn = document.getElementById("lightModeBtn");
+  const darkModeBtn = document.getElementById("darkModeBtn");
   const pdfExportBtn = document.getElementById("pdfExportBtn");
 
-  function applyPrintMode() {
-    const hash = location.hash.toLowerCase();
-    const isBw = hash === "#bw";
-    const isColor = !isBw;
-    document.body.classList.toggle("print-bw", isBw);
-    document.body.classList.toggle("print-color", isColor);
-    bwModeBtn?.classList.toggle("active", isBw);
-    colorModeBtn?.classList.toggle("active", isColor);
+  function applyTheme(isDark) {
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "");
+    darkModeBtn?.classList.toggle("active", isDark);
+    lightModeBtn?.classList.toggle("active", !isDark);
+    try { localStorage.setItem("cf_theme", isDark ? "dark" : "light"); } catch (e) {}
   }
 
-  colorModeBtn?.addEventListener("click", () => {
-    history.replaceState(null, "", "#color");
-    applyPrintMode();
-  });
-  bwModeBtn?.addEventListener("click", () => {
-    history.replaceState(null, "", "#bw");
-    applyPrintMode();
-  });
+  lightModeBtn?.addEventListener("click", () => applyTheme(false));
+  darkModeBtn?.addEventListener("click", () => applyTheme(true));
   pdfExportBtn?.addEventListener("click", () => {
+    const wasDark = document.documentElement.getAttribute("data-theme") === "dark";
+    if (wasDark) document.documentElement.setAttribute("data-theme", "");
     window.print();
+    if (wasDark) document.documentElement.setAttribute("data-theme", "dark");
   });
 
-  applyPrintMode();
-  window.addEventListener("hashchange", applyPrintMode);
+  const saved = (() => { try { return localStorage.getItem("cf_theme"); } catch (e) { return null; } })();
+  applyTheme(saved === "dark");
 </script>
 </body>
 </html>
