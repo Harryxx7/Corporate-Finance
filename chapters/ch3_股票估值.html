@@ -2977,31 +2977,31 @@
         <tbody>
           <tr>
             <td>股利固定不变</td>
-            <td><span class="res">固定股利模型</span></td>
+            <td>固定股利模型</td>
             <td>\(P_0=\dfrac{D_1}{r_s}\)</td>
             <td>确认是永续固定股利，直接按永续年金定价。</td>
           </tr>
           <tr>
             <td>股利固定增长</td>
-            <td><span class="res">戈登增长模型</span></td>
+            <td>戈登增长模型</td>
             <td>\(P_0=\dfrac{D_1}{r_s-g}\)</td>
             <td>先判断题目给的是 \(D_0\) 还是 \(D_1\)，若给 \(D_0\)，先乘 \(1+g\)。</td>
           </tr>
           <tr>
             <td>增长分阶段变化</td>
-            <td><span class="res">两阶段 DDM</span></td>
+            <td>两阶段 DDM</td>
             <td>\(P_0=\sum\dfrac{D_t}{(1+r_s)^t}+\dfrac{P_n}{(1+r_s)^n}\)</td>
             <td>先画时间轴：前期逐年折现，稳定期用戈登公式算终值。</td>
           </tr>
           <tr>
             <td>题目强调盈利、留存、ROE</td>
-            <td><span class="res">NPVGO</span></td>
+            <td>NPVGO</td>
             <td>\(V_0=\dfrac{E_1}{r_s}+NPVGO\)</td>
             <td>判断 \(ROE\) 与 \(r_s\)：只有 \(ROE>r_s\)，留存才创造股东财富。</td>
           </tr>
           <tr>
             <td>题目给 PE / EPS / 同行业倍数</td>
-            <td><span class="res">相对估值 PE</span></td>
+            <td>相对估值 PE</td>
             <td>\(PE=\dfrac{P}{EPS}\)，\(\dfrac{1}{PE}=\dfrac{EPS}{P}\)</td>
             <td>先确认盈利口径：历史 \(E_0\)、预期 \(E_1\)、还是 TTM。</td>
           </tr>
@@ -3270,7 +3270,7 @@
                   <div class="eq">
                     \[V_0 = \underbrace{\frac{1.25}{1.2}+\frac{1.5625}{1.2^2}+\frac{1.953}{1.2^3}}_{\displaystyle=1.04+1.09+1.13\;=\;3.26} + \underbrace{\frac{1.25^3\times1.05}{(0.2-0.05)\times1.2^3}}_{\displaystyle=7.91} = \mathbf{11.17 \text{ 美元}}\]
                   </div>
-                  <span class="res">V₀ = 11.17 美元 ✓</span>
+                  V₀ = 11.17 美元 ✓
                 </div>
               </div>
             </div>
@@ -3289,7 +3289,7 @@
                 <div class="stepbody">
                   市价 = 内在价值 = 11.17，下一期股利 \(D_1=1.25\)
                   <div class="eq">\[\text{股利收益率} = \frac{D_1}{P_0} = \frac{1.25}{11.17} \approx \mathbf{11.19\%}\]</div>
-                  <span class="res">股利收益率 ≈ 11.19%</span>
+                  股利收益率 ≈ 11.19%
                 </div>
               </div>
             </div>
@@ -3310,7 +3310,7 @@
                 <div class="stepbody">
                   由 \(V_0 = \dfrac{D_1 + V_1}{1+r_s}\) 整理得：
                   <div class="eq">\[V_1 = V_0\times(1+r_s) - D_1 = 11.17\times1.2 - 1.25 = 13.40-1.25 = \mathbf{12.15 \text{ 美元}}\]</div>
-                  <span class="res">V₁ = 12.15 美元 ✓</span>
+                  V₁ = 12.15 美元 ✓
                 </div>
               </div>
             </div>
@@ -3329,7 +3329,7 @@
                 <div class="stepbody">
                   资本利得率即股价涨幅，故一年后股价：
                   <div class="eq">\[V_1 = V_0\times(1+8.81\%) = 11.17\times1.0881 \approx \mathbf{12.15 \text{ 美元}}\]</div>
-                  <span class="res">V₁ = 12.15 美元 ✓</span>
+                  V₁ = 12.15 美元 ✓
                 </div>
               </div>
             </div>
@@ -3495,7 +3495,7 @@
               <span class="qtitle">增长率 $g$</span>
             </div>
             <div class="eq">\[g = ROE \times b = 10\% \times 20\% = 2\%\]</div>
-            <span class="res">g = 2%</span>
+            g = 2%
           </div>
 
           <div class="qblock">
@@ -3515,7 +3515,7 @@
                 <div class="stepbody">
                   <strong>方案①（现金牛，$b=0$，$g=0$）</strong>：
                   <div class="eq">\[P_0 = \frac{E_1}{r_s} = \frac{10}{16\%} = 62.5\text{ 元}\]</div>
-                  <span class="res">现金牛股价 = 62.5元</span>
+                  现金牛股价 = 62.5元
                 </div>
               </div>
               <div class="step">
@@ -3523,7 +3523,7 @@
                 <div class="stepbody">
                   <strong>方案②（拓展投资）</strong>：
                   <div class="eq">\[P_0 = \frac{D_1}{r_s - g} = \frac{E_1(1-b)}{r_s - ROE\times b} = \frac{10\times(1-20\%)}{16\%-2\%} = \frac{8}{0.14} \approx 57.14\text{ 元}\]</div>
-                  <span class="res warn">拓展股价 = 57.14元 &lt; 62.5元</span>
+                  拓展股价 = 57.14元 &lt; 62.5元
                 </div>
               </div>
             </div>
@@ -3545,7 +3545,7 @@
               <div class="step">
                 <span class="stepn">②</span>
                 <div class="stepbody">
-                  <span class="res warn">结论：不应选择投资</span>
+                  结论：不应选择投资
                   <p style="margin:6px 0; font-size:14.5px; color:var(--ink-soft);">
                     $ROE(10\%) < r_s(16\%)$：公司把钱留下来投项目，每一元只能赚 10 分，但市场要求回报是 16 分。留存再投资相当于在"做亏本买卖"，每股摧毁了 5.36 元的价值。
                   </p>
@@ -3622,7 +3622,7 @@
             <div class="qhead"><span class="qnum">1</span><span class="qtitle">不投资时的每股价值</span></div>
             <p style="font-size:14.5px; color:var(--ink-soft); margin:6px 0;">零增长永续年金，直接套公式：</p>
             <div class="eq">\[V_0 = \frac{E_1}{r_s} = \frac{8.25}{12\%} = \mathbf{68.75 \text{ 美元}}\]</div>
-            <span class="res">现金牛基准价 = 68.75 美元</span>
+            现金牛基准价 = 68.75 美元
           </div>
 
           <div class="qblock">
@@ -3648,7 +3648,7 @@
                 <div class="stepbody">
                   加回现金牛基准价：
                   <div class="eq">\[V_0 = \frac{E_1}{r_s} + NPVGO = 68.75 + 1.99 \approx \mathbf{70.74\text{ 美元}}\]</div>
-                  <span class="res accent">投资后每股价值 = 70.74 美元</span>
+                  投资后每股价值 = 70.74 美元
                 </div>
               </div>
             </div>
@@ -3736,7 +3736,7 @@
           <div class="stepbody">
             两边同时除以 \(E_1\)，得到预期市盈率：
             <div class="eq">\[\frac{P_0}{E_1} = \frac{1-b}{r_s-g}\]</div>
-            <span class="res">Forward PE = \(\frac{1-b}{r_s-g}\)</span>
+            Forward PE = \(\frac{1-b}{r_s-g}\)
           </div>
         </div>
         <div class="step">
@@ -3744,7 +3744,7 @@
           <div class="stepbody">
             若分母用历史盈利 \(E_0\)，且 \(E_1 = E_0(1+g)\)，则：
             <div class="eq">\[\frac{P_0}{E_0} = \frac{(1-b)(1+g)}{r_s-g}\]</div>
-            <span class="res gold">Trailing PE = \(\frac{(1-b)(1+g)}{r_s-g}\)</span>
+            Trailing PE = \(\frac{(1-b)(1+g)}{r_s-g}\)
           </div>
         </div>
       </div>
@@ -3945,7 +3945,7 @@
                 <div class="stepbody">
                   由 \(P_0=\dfrac{D_1}{r_s-g}\) 反推：
                   <div class="eq">\[10=\frac{0.525}{r_s-5\%}\Rightarrow r_s-5\%=5.25\%\Rightarrow \boxed{r_s=10.25\%}\]</div>
-                  <span class="res">rₛ = 10.25%</span>
+                  rₛ = 10.25%
                 </div>
               </div>
             </div>
@@ -3960,7 +3960,7 @@
             <div class="eq">\[P_0=\frac{D_1}{r_s}=\frac{1}{10.25\%}\approx \mathbf{9.76\text{ 元}}\]</div>
             <p style="margin:6px 0;">
               原股价 10 元高于现金牛价值 9.76 元，说明原来的增长机会有正价值：
-              <span class="res">NPVGO = 10 − 9.76 = 0.24元</span>
+              NPVGO = 10 − 9.76 = 0.24元
             </p>
           </div>
 
@@ -3989,7 +3989,7 @@
                 <div class="stepbody">
                   代入戈登公式：
                   <div class="eq">\[P_0=\frac{0.321}{10.25\%-7\%}=\frac{0.321}{3.25\%}\approx \mathbf{9.88\text{ 元}}\]</div>
-                  <span class="res">P₀ ≈ 9.88元</span>
+                  P₀ ≈ 9.88元
                 </div>
               </div>
             </div>
@@ -4098,7 +4098,7 @@
             <div class="stepbody">
               较低的 \(r_s\) 不能解释低 PE，因为必要报酬率越低，估值倍数反而越高：
               <div class="eq">\[r_s \downarrow \Rightarrow r_s-g \downarrow \Rightarrow PE \uparrow\]</div>
-              <span class="res">答案：C. 较低的 \(r_s\)</span>
+              答案：C. 较低的 \(r_s\)
             </div>
           </div>
         </div>
@@ -4134,7 +4134,7 @@
             <div class="stepbody">
               对比 PE：PE 的分母是净利润 \(E\)，净利润是税后利润，因此税率不同会直接影响 PE。
               <div class="eq">\[\text{税率差异} \Rightarrow E_{\text{税后}} \text{不同} \Rightarrow P/E \text{受影响}\]</div>
-              <span class="res">判断：正确</span>
+              判断：正确
             </div>
           </div>
         </div>
@@ -4201,7 +4201,7 @@
               实际市盈率：
               <div class="eq">\[PE_{\text{实际}}=\frac{P_0}{EPS_0}=\frac{20}{0.4}=50\]</div>
               因为 \(PE_{\text{实际}}=50>PE_{\text{理论}}=16.8\)，当前股价偏高。
-              <span class="res warn">建议：不买入 / 谨慎买入</span>
+              建议：不买入 / 谨慎买入
             </div>
           </div>
         </div>
@@ -4237,7 +4237,7 @@
             <div class="stepbody">
               代入减少后参数（$D_1'=2$ 元，$g'=5\%$，$r_s$ 不变仍为 $10\%$）：
               <div class="eq">\[P_0' = \frac{D_1'}{r_s - g'} = \frac{2}{10\% - 5\%} = \frac{2}{0.05} = \mathbf{40\text{ 元}}\]</div>
-              <span class="res">答案：D. 40元</span>
+              答案：D. 40元
             </div>
           </div>
         </div>
@@ -4265,7 +4265,7 @@
             <span class="stepn">①</span>
             <div class="stepbody">
               <div class="eq">\[P_0 = \frac{P_1 + D_1}{1 + r_s} = \frac{26 + 1.5}{1 + 15\%} = \frac{27.5}{1.15} \approx \mathbf{23.91\text{ 元}}\]</div>
-              <span class="res">答案：C. 23.91元</span>
+              答案：C. 23.91元
             </div>
           </div>
         </div>
@@ -4291,7 +4291,7 @@
             <div class="stepbody">
               按定义直接对应：
               <div class="eq">\[\frac{D_1}{P_0} = \text{股息收益率（Dividend Yield）}\]</div>
-              <span class="res">答案：A. 股息收益率</span>
+              答案：A. 股息收益率
             </div>
           </div>
         </div>
@@ -4327,7 +4327,7 @@
             <div class="stepbody">
               代入资本利得率公式：
               <div class="eq">\[\text{资本利得率} = \frac{P_1 - P_0}{P_0} = \frac{46.80 - 44.90}{44.90} = \frac{1.90}{44.90} \approx \mathbf{4.23\%}\]</div>
-              <span class="res">答案：B. 4.23%</span>
+              答案：B. 4.23%
             </div>
           </div>
         </div>
@@ -4360,7 +4360,7 @@
             <div class="stepbody">
               代入戈登公式：
               <div class="eq">\[P_0 = \frac{D_1}{r_s - g} = \frac{3}{12\% - 9\%} = \frac{3}{0.03} = \mathbf{100\text{ 元}}\]</div>
-              <span class="res">P₀ = 100元</span>
+              P₀ = 100元
             </div>
           </div>
         </div>
@@ -4433,7 +4433,7 @@
             <div class="stepbody">
               前9年无现金流，将 $P_9$ 折回 $t=0$：
               <div class="eq">\[P_0 = \frac{P_9}{(1+r_s)^9} = \frac{80}{(1.16)^9} \approx \mathbf{20.96\text{ 元}}\]</div>
-              <span class="res">P₀ ≈ 20.96元</span>
+              P₀ ≈ 20.96元
             </div>
           </div>
         </div>
@@ -4513,7 +4513,7 @@
             <div class="stepbody">
               令 \(P_4=\dfrac{D_4(1+g_2)}{r_s-g_2}=10\)，展开整理：
               <div class="eq">\[10(0.15-g_2)=0.6078(1+g_2) \;\Rightarrow\; 1.5-10g_2=0.6078+0.6078g_2 \;\Rightarrow\; \boxed{g_2\approx8.41\%}\]</div>
-              <span class="res">g₂ ≈ 8.41%</span>
+              g₂ ≈ 8.41%
             </div>
           </div>
         </div>
@@ -4534,7 +4534,7 @@
             <div class="stepbody">
               两法结果一致：
               <div class="eq">\[P_5 = P_4\,(1+g_2) = 10\times1.0841 \approx \mathbf{10.84\text{ 元}}\]</div>
-              <span class="res">P₅ = 10.84元</span>
+              P₅ = 10.84元
             </div>
           </div>
         </div>
@@ -4563,7 +4563,7 @@
             <div class="stepbody">
               加上 \(P_4\) 折回 \(t=0\)：
               <div class="eq">\[P_0 = 1.60 + \frac{P_4}{(1+r_s)^4} = 1.60 + \frac{10}{(1.15)^4} = 1.60 + 5.72 = \mathbf{7.32\text{ 元}}\]</div>
-              <span class="res">P₀ = 7.32元</span>
+              P₀ = 7.32元
             </div>
           </div>
           <div class="step">
@@ -4651,7 +4651,7 @@
             <span class="stepn">③</span>
             <div class="stepbody">
               <div class="eq">\[V_0 = \frac{E_1}{r_s} + NPVGO = \frac{10}{10\%} + (-4.55) = 100 - 4.55 = \mathbf{95.45\text{ 元}}\]</div>
-              <span class="res warn">NPVGO = −4.55 元，V₀ = 95.45 元（投资摧毁价值）</span>
+              NPVGO = −4.55 元，V₀ = 95.45 元（投资摧毁价值）
             </div>
           </div>
         </div>
@@ -4677,7 +4677,7 @@
             <span class="stepn">③</span>
             <div class="stepbody">
               <div class="eq">\[V_0 = \frac{E_1}{r_s} + NPVGO = \frac{10}{10\%} + 9.09 = 100 + 9.09 = \mathbf{109.09\text{ 元}}\]</div>
-              <span class="res accent">NPVGO = 9.09 元，V₀ = 109.09 元（投资创造价值）</span>
+              NPVGO = 9.09 元，V₀ = 109.09 元（投资创造价值）
             </div>
           </div>
         </div>
