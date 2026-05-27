@@ -220,6 +220,8 @@
     padding: 24px;
     box-shadow: 0 4px 12px var(--shadow);
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
   }
   .category-card:hover {
     transform: translateY(-2px);
@@ -266,6 +268,59 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex-grow: 1;
+    margin-bottom: 20px;
+  }
+
+  .read-chapter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+    margin-top: auto;
+  }
+  .category-card.ch1 .read-chapter-btn {
+    border: 1.2px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+  }
+  .category-card.ch1 .read-chapter-btn:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+  .category-card.ch2 .read-chapter-btn {
+    border: 1.2px solid var(--warn);
+    color: var(--warn);
+    background: transparent;
+  }
+  .category-card.ch2 .read-chapter-btn:hover {
+    background: var(--warn);
+    color: #fff;
+  }
+  .category-card.ch3 .read-chapter-btn {
+    border: 1.2px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+  }
+  .category-card.ch3 .read-chapter-btn:hover {
+    background: var(--gold);
+    color: #fff;
+  }
+  .category-card.ch4 .read-chapter-btn {
+    border: 1.2px solid #5a7b8c;
+    color: #5a7b8c;
+    background: transparent;
+  }
+  .category-card.ch4 .read-chapter-btn:hover {
+    background: #5a7b8c;
+    color: #fff;
   }
   .anchors-list li a {
     display: flex;
@@ -458,6 +513,7 @@
         <li><a href="chapters/ch1_实物期权.html#ex1">放弃期权 (Abandonment) 例题计算</a></li>
         <li><a href="chapters/ch1_实物期权.html#summary1">例题指标对比与放弃临界点</a></li>
       </ul>
+      <a href="chapters/ch1_实物期权.html" class="read-chapter-btn">进入本章学习 ➔</a>
     </div>
 
     <!-- 第二章 -->
@@ -470,6 +526,7 @@
       <ul class="anchors-list">
         <li><a href="chapters/ch2_债券估值.html">进入第二章占位页 (素材就位中)</a></li>
       </ul>
+      <a href="chapters/ch2_债券估值.html" class="read-chapter-btn">进入本章学习 ➔</a>
     </div>
 
     <!-- 第三章 -->
@@ -486,6 +543,7 @@
         <li><a href="chapters/ch3_股票估值.html#idx-pe-drivers">市盈率 PE 的深层影响因素</a></li>
         <li><a href="chapters/ch3_股票估值.html#idx-ev-ebitda">跨国对比利器：EV/EBITDA</a></li>
       </ul>
+      <a href="chapters/ch3_股票估值.html" class="read-chapter-btn">进入本章学习 ➔</a>
     </div>
 
     <!-- 第四章 -->
@@ -502,6 +560,7 @@
         <li><a href="chapters/ch4_现代资产组合理论.html#mpt-diversify">等权组合分散化效应公式</a></li>
         <li><a href="chapters/ch4_现代资产组合理论.html#mpt-utility">效用函数与风险厌恶无差异曲线</a></li>
       </ul>
+      <a href="chapters/ch4_现代资产组合理论.html" class="read-chapter-btn">进入本章学习 ➔</a>
     </div>
 
   </div>
