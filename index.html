@@ -684,6 +684,7 @@
   </div>
 
   <div class="hot-tags" id="hotTags">
+    <!-- 原有核心知识 -->
     <span>D0/D1</span>
     <span>NPVGO</span>
     <span>放弃期权</span>
@@ -691,6 +692,13 @@
     <span>分散化效应</span>
     <span>EV/EBITDA</span>
     <span>简单多数投票制</span>
+    <!-- 最新追加核心公式 -->
+    <span>WACC</span>
+    <span>MM定理</span>
+    <span>可持续增长率</span>
+    <span>年金公式</span>
+    <span>EFN</span>
+    <span>利率平价</span>
   </div>
 </div>
 
@@ -2667,10 +2675,23 @@
     performSearch();
   });
 
-  // 快捷标签点击检索
+  // 快捷标签点击检索 (智能双模分流路由)
   hotTags.addEventListener("click", (e) => {
     if (e.target.tagName.toLowerCase() === "span") {
-      searchInput.value = e.target.textContent;
+      const tagText = e.target.textContent;
+      
+      // 智能判定该标签是否属于“公式库”
+      const formulaTags = ["wacc", "mm定理", "可持续增长率", "年金公式", "efn", "利率平价", "久期", "capm"];
+      const isFormulaTag = formulaTags.includes(tagText.toLowerCase());
+      
+      // 平滑自动路由切换 Tab
+      if (isFormulaTag && currentTab !== "formula") {
+        switchTab("formula");
+      } else if (!isFormulaTag && currentTab !== "knowledge") {
+        switchTab("knowledge");
+      }
+      
+      searchInput.value = tagText;
       searchInput.focus();
       performSearch();
     }
