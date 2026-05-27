@@ -389,6 +389,15 @@
     }
   }
 </style>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+</script>
+<script src="chapters/mathjax-tex-mml-svg.js"></script>
 </head>
 <body>
 
@@ -654,6 +663,11 @@
       `;
     });
     searchResults.innerHTML = html;
+    if (window.MathJax) {
+      MathJax.typesetPromise([searchResults]).catch(function (err) {
+        console.error(err);
+      });
+    }
   }
 
   // 事件监听
