@@ -443,6 +443,198 @@
       display: none;
     }
   }
+
+  /* ===== Tab 切换分栏 ===== */
+  .tabs-wrapper {
+    max-width: 1040px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+    display: flex;
+    justify-content: center;
+  }
+  .tabs-container {
+    display: flex;
+    background: var(--bg-soft);
+    padding: 4px;
+    border-radius: 24px;
+    gap: 4px;
+    border: 1px solid var(--rule-soft);
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--ink-soft);
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .tab-btn:hover {
+    color: var(--ink);
+  }
+  .tab-btn.active {
+    background: var(--bg-elev);
+    color: var(--accent);
+    box-shadow: 0 4px 10px var(--shadow);
+  }
+
+  /* ===== 公式速查面板 ===== */
+  .formula-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .filter-tag {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    background: var(--bg-soft);
+    border: 1.2px solid transparent;
+    padding: 6px 16px;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .filter-tag:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .filter-tag.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  /* 公式卡片样式 */
+  .formula-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .formula-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-hover);
+    border-color: var(--gold);
+  }
+  
+  .formula-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11.5px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--rule-soft);
+    padding-bottom: 6px;
+  }
+  .formula-subject-badge {
+    background: var(--gold-soft);
+    color: var(--gold);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .formula-card-meta .chapter-name {
+    color: var(--ink-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+  }
+
+  .formula-card-title {
+    font-size: 16.5px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  /* 公式包装盒 */
+  .formula-math-box {
+    background: var(--formula-bg);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+    overflow-x: auto;
+    border: 1px solid var(--rule-soft);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70px;
+  }
+
+  .formula-desc {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    flex-grow: 1;
+  }
+
+  .formula-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+  }
+  .copy-btn {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+  }
+  .copy-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-soft);
+  }
+  .copy-btn.copied {
+    border-color: var(--accent);
+    color: #fff;
+    background: var(--accent);
+  }
+
+  /* 自适应公式卡片在小屏幕下的排版 */
+  @media (max-width: 768px) {
+    .tabs-wrapper {
+      margin: 20px auto 0;
+    }
+    .tab-btn {
+      padding: 8px 16px;
+      font-size: 13.5px;
+    }
+    .formula-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 <script>
   MathJax = {
@@ -487,6 +679,19 @@
     <span>分散化效应</span>
     <span>EV/EBITDA</span>
     <span>简单多数投票制</span>
+  </div>
+</div>
+
+
+<!-- Tab 切换分栏 -->
+<div class="tabs-wrapper">
+  <div class="tabs-container">
+    <button type="button" class="tab-btn active" id="tabKnowledge" onclick="switchTab('knowledge')">
+      <span class="tab-icon">📖</span> 知识导航
+    </button>
+    <button type="button" class="tab-btn" id="tabFormula" onclick="switchTab('formula')">
+      <span class="tab-icon">🧮</span> 公式速查
+    </button>
   </div>
 </div>
 
@@ -566,12 +771,27 @@
   </div>
 
   <!-- 搜索态：搜索结果展现区 -->
+  
+  <!-- 默认态：公式速查容器 (默认隐藏) -->
+  <div id="formulaContainer" style="display: none;">
+    <!-- 公式科目过滤器 -->
+    <div class="formula-filter" id="formulaFilter">
+      <span class="filter-tag active" data-subject="all">全部科目</span>
+      <span class="filter-tag" data-subject="公司理财">公司理财</span>
+      <span class="filter-tag" data-subject="投资学">投资学</span>
+      <span class="filter-tag" data-subject="货币银行学">货币银行学</span>
+      <span class="filter-tag" data-subject="国际金融">国际金融</span>
+    </div>
+
+    <!-- 公式卡片网格 -->
+    <div class="formula-grid" id="formulaGrid"></div>
+  </div>
+
   <div class="search-results-list" id="searchResults" style="display: none;"></div>
 
 </main>
 
 <script>
-  /* ===== 1. 核心知识点字典数据源 ===== */
   const KNOWLEDGE_INDEX = [
     // 一、实物期权
     { id: "c1", category: "实物期权", title: "实物期权含义与分类 (Myers 1977)", keywords: "swqq shiwuqiquan fl myers 1977 拓展期权 放弃期权 择机期权 等待期权", desc: " Myers (1977) 提出，包含拓展期权、放弃期权、择机期权等基本特征与定义", link: "chapters/ch1_实物期权.html#c1" },
@@ -614,6 +834,1513 @@
     { id: "mpt-utility", category: "现代资产组合", title: "投资者效用函数与无差异曲线", keywords: "xy xyhx wcy wcyqx 效用值 风险厌恶 厌恶系数 无差异曲线 越左上越好 斜率", desc: "效用公式 $U = E(r) - \\frac{1}{2}A\\sigma^2$，风险厌恶系数 A 与向右上方倾斜的无差异曲线", link: "chapters/ch4_现代资产组合理论.html#mpt-utility" }
   ];
 
+  /* ===== 1.5 全量公式结构化数据库 ===== */
+  const FORMULA_DATABASE = [
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "企业现金流量",
+    "group": "企业的现金流量",
+    "name": "企业的现金流量总额",
+    "formula": "\\text{经营性现金流量} = EBIT + \\text{折旧} - \\text{税（当期税款）}",
+    "description": "企业的现金流量总额 = 经营性现金流量 − 资本性支出 − 净营运资本的增加"
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "企业现金流量",
+    "group": "企业的现金流量",
+    "name": "企业的现金流量总额",
+    "formula": "\\text{资本性支出} = \\text{固定资产的取得} - \\text{固定资产的出售}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "企业现金流量",
+    "group": "企业的现金流量",
+    "name": "企业的现金流量总额",
+    "formula": "= \\text{期末固定资产净额} - \\text{期初固定资产净额} + \\text{当期折旧}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "企业现金流量",
+    "group": "企业的现金流量",
+    "name": "企业的现金流量总额",
+    "formula": "\\text{净营运资本的增加} = \\text{下一年的净营运资本} - \\text{本年的净营运资本}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "企业现金流量",
+    "group": "企业的现金流量",
+    "name": "企业的现金流出（企业的现金流量）",
+    "formula": "\\text{向债权人支付的现金流量} = \\text{支付的利息} - \\text{净增借款}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "企业现金流量",
+    "group": "企业的现金流量",
+    "name": "企业的现金流出（企业的现金流量）",
+    "formula": "= \\text{支付的利息} - (\\text{期末长期债务} - \\text{期初长期债务})",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "企业现金流量",
+    "group": "企业的现金流量",
+    "name": "企业的现金流出（企业的现金流量）",
+    "formula": "\\text{向股东的现金流出} = \\text{支付的股利} - \\text{权益筹资净额}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "企业现金流量",
+    "group": "企业的现金流量",
+    "name": "企业的现金流出（企业的现金流量）",
+    "formula": "= \\text{支付的股利} - (\\text{发行的股票} - \\text{回购的股票})",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "短期偿债能力与流动性指标",
+    "name": "流动比率",
+    "formula": "\\text{流动比率} = \\frac{\\text{流动资产}}{\\text{流动负债}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "短期偿债能力与流动性指标",
+    "name": "速动比率（酸性试验比率）",
+    "formula": "\\text{速动比率} = \\frac{\\text{流动资产} - \\text{存货}}{\\text{流动负债}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "短期偿债能力与流动性指标",
+    "name": "现金比率",
+    "formula": "\\text{现金比率} = \\frac{\\text{现金}}{\\text{流动负债}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "长期偿债能力指标",
+    "name": "总负债比率（资产负债率）",
+    "formula": "\\text{总负债比率} = \\frac{\\text{总资产} - \\text{总权益}}{\\text{总资产}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "长期偿债能力指标",
+    "name": "利息倍数",
+    "formula": "\\text{利息倍数} = \\frac{\\text{息税前利润（EBIT）}}{\\text{利息}}",
+    "description": "两个有用的变形形式： ① 负债—权益比（产权比率）= 总负债 / 总权益 ② 权益乘数 = 总资产 / 总权益 = 1 + 负债—权益比"
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "长期偿债能力指标",
+    "name": "现金对利息的保障倍数",
+    "formula": "\\text{现金对利息的保障倍数} = \\frac{EBIT + \\text{折旧和摊销}}{\\text{利息}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "资产管理或周转指标",
+    "name": "存货周转率与存货周转天数",
+    "formula": "\\text{存货周转率} = \\frac{\\text{产品销售成本}}{\\text{存货}}\n\\qquad\n\\text{存货周转天数} = \\frac{365 \\text{ 天}}{\\text{存货周转率}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "资产管理或周转指标",
+    "name": "应收账款周转率和应收账款周转天数",
+    "formula": "\\text{应收账款周转率} = \\frac{\\text{销售额}}{\\text{应收账款}}\n\\qquad\n\\text{应收账款周转天数} = \\frac{365 \\text{ 天}}{\\text{应收账款周转率}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "资产管理或周转指标",
+    "name": "总资产周转率",
+    "formula": "\\text{总资产周转率} = \\frac{\\text{销售额}}{\\text{总资产}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "盈利性指标",
+    "name": "销售净利润率",
+    "formula": "\\text{销售净利润率} = \\frac{\\text{净利润}}{\\text{销售额}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "盈利性指标",
+    "name": "EBITDA 利润率",
+    "formula": "EBITDA \\text{ 利润率} = \\frac{EBITDA}{\\text{销售额}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "盈利性指标",
+    "name": "资产收益率（ROA）",
+    "formula": "ROA = \\frac{\\text{净利润}}{\\text{总资产}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "盈利性指标",
+    "name": "权益收益率（ROE）",
+    "formula": "ROE = \\frac{\\text{净利润}}{\\text{总权益}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "市场价值的度量指标",
+    "name": "市盈率（PE）",
+    "formula": "\\text{市盈率} = \\frac{\\text{每股价格}}{\\text{每股收益}}\n\\qquad\nEPS = \\frac{\\text{净利润}}{\\text{发行在外的股票数量}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "市场价值的度量指标",
+    "name": "市值面值比",
+    "formula": "\\text{市值面值比} = \\frac{\\text{每股市场价值}}{\\text{每股账面价值}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "市场价值的度量指标",
+    "name": "股票市值",
+    "formula": "\\text{上市公司市值} = \\text{发行在外的股份数} \\times \\text{每股市场价格}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "市场价值的度量指标",
+    "name": "企业价值（EV）",
+    "formula": "EV = \\text{股票市值} + \\text{附息债务的市值} - \\text{现金}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "市场价值的度量指标",
+    "name": "企业价值乘数",
+    "formula": "\\text{企业价值乘数} = \\frac{EV}{EBITDA}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "杜邦恒等式",
+    "name": "杜邦恒等式",
+    "formula": "ROE = \\text{销售利润率} \\times \\text{总资产周转率} \\times \\text{权益乘数}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "杜邦恒等式",
+    "name": "杜邦恒等式",
+    "formula": "ROE = \\frac{\\text{净利润}}{\\text{总权益}} \\times \\frac{\\text{资产}}{\\text{资产}} = \\frac{\\text{净利润}}{\\text{资产}} \\times \\frac{\\text{资产}}{\\text{总权益}} = ROA \\times \\text{权益乘数}",
+    "description": "推导过程："
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "杜邦恒等式",
+    "name": "杜邦恒等式",
+    "formula": "ROE = \\frac{\\text{净利润}}{\\text{资产}} \\times \\frac{\\text{资产}}{\\text{总权益}} \\times \\frac{\\text{销售额}}{\\text{销售额}} = \\frac{\\text{净利润}}{\\text{销售额}} \\times \\frac{\\text{销售额}}{\\text{资产}} \\times \\frac{\\text{资产}}{\\text{总权益}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "杜邦恒等式",
+    "name": "杜邦恒等式",
+    "formula": "= \\text{销售利润率} \\times \\text{总资产周转率} \\times \\text{权益乘数}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "外部融资需求量（EFN）",
+    "name": "外部融资需求量（EFN）",
+    "formula": "EFN = \\frac{\\text{资产}}{\\text{销售额}} \\times \\Delta\\text{销售额} - \\frac{\\text{自然增长的负债}}{\\text{销售额}} \\times \\Delta\\text{销售额} - PM \\times \\text{预计销售额} \\times (1-d)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "内部增长率",
+    "name": "内部增长率",
+    "formula": "\\text{内部增长率} = \\frac{ROA \\times b}{1 - ROA \\times b}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第二章-财务报表分析",
+    "fileTitle": "财务比率全览与杜邦分析",
+    "group": "可持续增长率",
+    "name": "可持续增长率",
+    "formula": "\\text{可持续增长率} = \\frac{ROE \\times b}{1 - ROE \\times b}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第三章-折现现金流估值",
+    "fileTitle": "年金系列公式大全",
+    "group": "永续年金",
+    "name": "永续年金",
+    "formula": "PV = \\frac{C}{1+r} + \\frac{C}{(1+r)^2} + \\frac{C}{(1+r)^3} + \\dots = \\frac{C}{r}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第三章-折现现金流估值",
+    "fileTitle": "年金系列公式大全",
+    "group": "永续增长年金",
+    "name": "永续增长年金",
+    "formula": "PV = \\frac{C}{1+r} + \\frac{C(1+g)}{(1+r)^2} + \\frac{C(1+g)^2}{(1+r)^3} + \\dots = \\frac{C}{r-g}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第三章-折现现金流估值",
+    "fileTitle": "年金系列公式大全",
+    "group": "T 年普通年金（现值）",
+    "name": "T 年普通年金（现值）",
+    "formula": "PV = \\frac{C}{1+r} + \\frac{C}{(1+r)^2} + \\dots + \\frac{C}{(1+r)^T} = C \\times \\left(\\frac{1}{r} - \\frac{1}{r(1+r)^T}\\right)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第三章-折现现金流估值",
+    "fileTitle": "年金系列公式大全",
+    "group": "T 年普通年金（终值）",
+    "name": "T 年普通年金（终值）",
+    "formula": "FV = C \\left(\\frac{(1+r)^T - 1}{r}\\right)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第三章-折现现金流估值",
+    "fileTitle": "年金系列公式大全",
+    "group": "T 年增长年金（现值）",
+    "name": "T 年增长年金（现值）",
+    "formula": "PV = \\frac{C}{1+r} + \\frac{C(1+g)}{(1+r)^2} + \\dots + \\frac{C(1+g)^{T-1}}{(1+r)^T} = \\frac{C}{r-g} \\times \\left[1 - \\left(\\frac{1+g}{1+r}\\right)^T\\right]",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第三章-折现现金流估值",
+    "fileTitle": "年金系列公式大全",
+    "group": "T 年增长年金（终值）",
+    "name": "T 年增长年金（终值）",
+    "formula": "FV = \\frac{C(1+r)^T}{r-g} \\times \\left[1 - \\left(\\frac{1+g}{1+r}\\right)^T\\right]",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "净现值（NPV）",
+    "name": "净现值（NPV）",
+    "formula": "NPV = \\sum_{t=1}^{n} \\frac{CF_t}{(1+r)^t} - C_0",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "内部收益率（IRR）",
+    "name": "内部收益率（IRR）",
+    "formula": "\\sum_{t=1}^{n} \\frac{CF_t}{(1+IRR)^t} - C_0 = 0",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "修正 IRR（折现率的函数）",
+    "name": "修正 IRR（折现率的函数）",
+    "formula": "\\sum_{t=1}^{n} \\frac{OCF_t}{(1+r)^t} = \\frac{\\displaystyle\\sum_{t=1}^{n} CIF_t (1+r)^{n-t}}{(1+MIRR)^n}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "回收期（PB）",
+    "name": "回收期（PB）",
+    "formula": "\\sum_{t=1}^{T} CF_t = CF_0",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "盈利指数（PI）",
+    "name": "盈利指数（PI）",
+    "formula": "PI = \\frac{\\text{初始投资所带来的后续现金流量的现值}}{\\text{初始投资}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "平均会计利润率",
+    "name": "平均会计利润率",
+    "formula": "AAR = \\frac{\\text{项目寿命周期内的平均会计利润}}{\\text{项目寿命周期内的平均账面价值}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "经营性现金流量（OCF）",
+    "name": "定义法",
+    "formula": "OCF = EBIT + \\text{折旧} - \\text{税}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "经营性现金流量（OCF）",
+    "name": "自上而下法",
+    "formula": "OCF = \\text{销售收入} - \\text{现金成本} - \\text{税收}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "经营性现金流量（OCF）",
+    "name": "自上而下法",
+    "formula": "\\text{税收} = (\\text{销售收入} - \\text{成本} - \\text{折旧}) \\times t_c",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "经营性现金流量（OCF）",
+    "name": "自下而上法",
+    "formula": "OCF = \\text{净利润} + \\text{折旧} = (\\text{销售收入} - \\text{现金成本} - \\text{折旧}) \\times (1-t_c) + \\text{折旧}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "经营性现金流量（OCF）",
+    "name": "税盾法",
+    "formula": "OCF = (\\text{销售收入} - \\text{现金支出}) \\times (1-t_c) + \\text{折旧} \\times t_c",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第四章-资本预算",
+    "fileTitle": "投资决策评估方法",
+    "group": "会计利润的盈亏平衡点",
+    "name": "会计利润的盈亏平衡点",
+    "formula": "\\text{会计利润的盈亏平衡点} = \\frac{\\text{固定成本} + \\text{折旧}}{\\text{销售单价} - \\text{单位变动成本}}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "MM定理与权衡理论",
+    "group": "无税的 MM 定理命题 2",
+    "name": "无税的 MM 定理命题 2",
+    "formula": "R_S = R_0 + \\frac{B}{S}(R_0 - R_B)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "MM定理与权衡理论",
+    "group": "有税的 MM 定理命题 1",
+    "name": "有税的 MM 定理命题 1",
+    "formula": "V_L = \\frac{EBIT \\times (1-t_c)}{R_0} + \\frac{t_c R_B B}{R_B}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "MM定理与权衡理论",
+    "group": "有税的 MM 定理命题 1",
+    "name": "有税的 MM 定理命题 1",
+    "formula": "V_L = V_U + t_c \\times B",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "MM定理与权衡理论",
+    "group": "有税的 MM 定理命题 2",
+    "name": "有税的 MM 定理命题 2",
+    "formula": "R_S = R_0 + \\frac{B}{S}(R_0 - R_B)(1-t_c)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "MM定理与权衡理论",
+    "group": "权衡理论",
+    "name": "权衡理论",
+    "formula": "V_L = V_U + \\text{利息税盾现值} - \\text{财务困境成本现值}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "经营杠杆系数（DOL）",
+    "name": "经营杠杆系数（DOL）",
+    "formula": "DOL = \\frac{\\Delta EBIT / EBIT}{\\Delta Q / Q} = \\frac{(P-VC)Q}{EBIT} = \\frac{EBIT + FC + D}{EBIT}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "财务杠杆系数（DFL）",
+    "name": "财务杠杆系数（DFL）",
+    "formula": "DFL = \\frac{(P-VC)Q - FC - D}{(P-VC)Q - FC - D - I} = \\frac{EBIT}{EBIT - I}",
+    "description": "DFL = 普通股每股收益变动率 / 息税前利润变动率"
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "权益资本成本",
+    "name": "权益资本成本",
+    "formula": "R_S = R_f + \\beta(R_M - R_f)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "股利折现模型（DDM）",
+    "name": "股利折现模型（DDM）",
+    "formula": "R_S = \\frac{DIV_1}{P} + g",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "加权平均资本成本（WACC）",
+    "name": "加权平均资本成本（WACC）",
+    "formula": "R_{WACC} = \\frac{S}{B+S} \\times R_S + \\frac{B}{B+S} \\times R_B \\times (1-t_c)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "加权融资成本",
+    "name": "加权融资成本",
+    "formula": "f_0 = \\frac{S}{V} f_S + \\frac{B}{V} f_B",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "加权融资成本",
+    "name": "加权融资成本",
+    "formula": "UCF = EBIT \\times (1-t) \\qquad LCF = (EBIT - I) \\times (1-t)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "调整净现值法（APV）",
+    "name": "调整净现值法（APV）",
+    "formula": "APV = NPV + NPVF",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "权益现金流量法（FTE）",
+    "name": "权益现金流量法（FTE）",
+    "formula": "\\frac{LCF}{R_S} - \\text{初始权益投资额}",
+    "description": "其中 $NPV = UCF / R_0$"
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "加权平均资本成本法（WACC）",
+    "name": "加权平均资本成本法（WACC）",
+    "formula": "NPV = \\sum_{t=1}^{\\infty} \\frac{UCF}{(1+R_{WACC})} - \\text{初始投资额}",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "无税时 $\\beta$ 系数与企业杠杆之间的关系（$\\beta_{\\text{负债}}=0$）",
+    "name": "无税时 $\\beta$ 系数与企业杠杆之间的关系（$\\beta_{\\text{负债}}=0$）",
+    "formula": "\\beta_{\\text{权益}} = \\beta_{\\text{资产}} \\times \\left(1 + \\frac{\\text{负债}}{\\text{权益}}\\right)",
+    "description": ""
+  },
+  {
+    "subject": "公司理财",
+    "chapter": "第五章-资本结构与杠杆",
+    "fileTitle": "杠杆企业估值：WACC、APV 与 Beta",
+    "group": "有税时有杠杆企业权益 $\\beta$ 与无杠杆企业权益 $\\beta$ 的关系（$\\beta_{\\text{负债}}=0$）",
+    "name": "有税时有杠杆企业权益 $\\beta$ 与无杠杆企业权益 $\\beta$ 的关系（$\\beta_{\\text{负债}}=0$）",
+    "formula": "\\beta_{\\text{权益}} = \\beta_{\\text{无杠杆企业}} \\left[1 + \\frac{(1-t_c)\\text{负债}}{\\text{权益}}\\right]",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "债券的估值",
+    "name": "债券的估值",
+    "formula": "V = C \\times \\frac{1 - \\dfrac{1}{(1+r)^T}}{r} + \\frac{F}{(1+r)^T}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "麦考利久期公式",
+    "name": "麦考利久期公式",
+    "formula": "w_t = \\frac{CF_t / (1+y)^t}{\\text{债券价格}}\n\\qquad\nD = \\sum_{t=1}^{T} t \\times w_t",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "修正久期",
+    "name": "修正久期",
+    "formula": "D^* = \\frac{D}{1+y}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "修正久期",
+    "name": "修正久期",
+    "formula": "\\Delta P / P = -D^* \\Delta y",
+    "description": "由于 $\\Delta(1+y) = \\Delta y$，得到："
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "终身年金的久期",
+    "name": "终身年金的久期",
+    "formula": "\\frac{1+y}{y}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "按面值计算的债券久期",
+    "name": "按面值计算的债券久期",
+    "formula": "\\frac{1+y}{y} \\left[1 - \\frac{1}{(1+y)^T}\\right]",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "凸性",
+    "name": "凸性",
+    "formula": "\\Delta P / P = -D^* \\Delta y + \\frac{1}{2} \\times \\text{凸性} \\times (\\Delta y)^2",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "凸性",
+    "name": "凸性",
+    "formula": "\\text{凸性} = \\frac{1}{P \\times (1+y)^2} \\sum_{t=1}^{T} \\left[CF_t / (1+y)^t \\cdot (t^2 + t)\\right]",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "债券久期、凸性与修正久期",
+    "group": "有效久期",
+    "name": "有效久期",
+    "formula": "\\text{有效久期} = -\\frac{\\Delta P / P}{\\Delta r}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "股票估值：DDM 与 NPVGO",
+    "group": "零增长股票",
+    "name": "零增长股票",
+    "formula": "P_0 = \\frac{DIV_1}{R}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "股票估值：DDM 与 NPVGO",
+    "group": "固定增长股票",
+    "name": "固定增长股票",
+    "formula": "P_0 = \\frac{DIV_1}{R - g}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "股票估值：DDM 与 NPVGO",
+    "group": "NPVGO 模型",
+    "name": "NPVGO 模型",
+    "formula": "P = \\frac{EPS}{r} + NPVGO",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第二章-债券与股票估值",
+    "fileTitle": "股票估值：DDM 与 NPVGO",
+    "group": "市盈率与增长机会",
+    "name": "市盈率与增长机会",
+    "formula": "\\frac{P_0}{E_1} = \\frac{1}{k} \\left(1 + \\frac{PVGO}{E_1 / k}\\right)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "看跌—看涨期权平价",
+    "name": "看跌—看涨期权平价",
+    "formula": "C + \\frac{X}{(1+r_f)^T} = P + S_0",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "布莱克—斯科尔斯模型（BSM）",
+    "name": "布莱克—斯科尔斯模型（BSM）",
+    "formula": "C = N(d_1)S - N(d_2)Ee^{-rT}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "布莱克—斯科尔斯模型（BSM）",
+    "name": "布莱克—斯科尔斯模型（BSM）",
+    "formula": "d_1 = \\frac{\\ln(S/E) + (r + \\sigma^2/2)T}{\\sqrt{\\sigma^2 T}}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "布莱克—斯科尔斯模型（BSM）",
+    "name": "布莱克—斯科尔斯模型（BSM）",
+    "formula": "d_2 = d_1 - \\sigma\\sqrt{T}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "复制原理定价",
+    "name": "复制原理定价",
+    "formula": "(\\Delta \\times uS) + (B \\times e^{rh}) = C_u",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "复制原理定价",
+    "name": "复制原理定价",
+    "formula": "(\\Delta \\times dS) + (B \\times e^{rh}) = C_d",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "复制原理定价",
+    "name": "复制原理定价",
+    "formula": "\\Delta = \\frac{\\text{期权价格变动幅度}}{\\text{标的资产价格变动幅度}} = \\frac{C_u - C_d}{S(u-d)}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "复制原理定价",
+    "name": "复制原理定价",
+    "formula": "B = e^{-rh} \\frac{uC_d - dC_u}{u-d}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期权定价：BSM 与复制原理",
+    "group": "复制原理定价",
+    "name": "复制原理定价",
+    "formula": "\\Delta S + B = e^{-rh} \\left(C_u \\frac{e^{rh}-d}{u-d} + C_d \\frac{u-e^{rh}}{u-d}\\right)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期货定价与外汇期货",
+    "group": "现货—期货平价定理",
+    "name": "现货—期货平价定理",
+    "formula": "F_0 = S_0(1+r_f) - D = S_0(1+r_f-d)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第六章-期权与期货",
+    "fileTitle": "期货定价与外汇期货",
+    "group": "外汇期货（利率平价）",
+    "name": "外汇期货（利率平价）",
+    "formula": "F_0 = E_0 \\left(\\frac{1+r_{US}}{1+r_{UK}}\\right)^T",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "市场组合的风险溢价",
+    "name": "市场组合的风险溢价",
+    "formula": "E(r_M) - r_f = \\bar{A} \\sigma_M^2",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "资本配置线",
+    "name": "资本配置线",
+    "formula": "E(r_c) = r_f + \\frac{\\sigma_c}{\\sigma_p} [E(r_p) - r_f] = r_f + \\frac{E(r_p) - r_f}{\\sigma_p} \\sigma_c",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "资本市场线（CML）",
+    "name": "资本市场线（CML）",
+    "formula": "E(R_p) = R_f + \\frac{E(R_M) - R_f}{\\sigma_M} \\times \\sigma_p",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "证券市场线（SML）",
+    "name": "证券市场线（SML）",
+    "formula": "R_S = R_f + \\beta(R_M - R_f)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "$\\beta$ 系数",
+    "name": "$\\beta$ 系数",
+    "formula": "\\beta_i = \\frac{Cov(R_i, R_m)}{\\sigma^2(R_m)}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "效用函数",
+    "name": "效用函数",
+    "formula": "U = E(r) - \\frac{1}{2} A \\sigma^2",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "最优风险资产头寸",
+    "name": "最优风险资产头寸",
+    "formula": "y^* = \\frac{E(r_p) - r_f}{A \\sigma_P^2}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "最小方差组合",
+    "name": "最小方差组合",
+    "formula": "w_{Min}(D) = \\frac{\\sigma_E^2 - Cov(r_D, r_E)}{\\sigma_D^2 + \\sigma_E^2 - 2\\,Cov(r_D, r_E)}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "最优风险组合",
+    "name": "最优风险组合",
+    "formula": "w_D = \\frac{E(R_D)\\sigma_E^2 - E(R_E)Cov(R_D,R_E)}{E(R_D)\\sigma_E^2 + E(R_E)\\sigma_D^2 - [E(R_D)+E(R_E)]Cov(R_D,R_E)}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "CML 资本市场线与最优组合",
+    "group": "最优风险组合",
+    "name": "最优风险组合",
+    "formula": "w_E = 1 - w_D",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "收益率",
+    "name": "收益率",
+    "formula": "R_{t+1} = \\frac{Div_{t+1}}{P_t} + \\frac{P_{t+1} - P_t}{P_t}",
+    "description": "总收益 = 股利收入 + 资本利得（或资本损失） 收益率 = 股票的股利收益率 + 资本利得收益率"
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "持有期收益与持有期收益率",
+    "name": "持有期收益",
+    "formula": "\\text{持有期收益} = (1+R_1) \\times (1+R_2) \\times \\dots \\times (1+R_n)",
+    "description": "其中 $\\dfrac{Div_{t+1}}{P_t}$ 代表股利收益率，$\\dfrac{P_{t+1}-P_t}{P_t}$ 代表资本利得收益率，$P_t$ 是年初股票价格，$P_{t+1}$ 是年末股票价格。"
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "持有期收益与持有期收益率",
+    "name": "持有期收益率",
+    "formula": "\\text{持有期收益率} = (1+R_1) \\times (1+R_2) \\times \\dots \\times (1+R_n) - 1",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "算术平均收益率与几何平均收益率",
+    "name": "算术平均收益率",
+    "formula": "\\text{平均收益率} = \\frac{R_1 + R_2 + \\dots + R_T}{T}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "算术平均收益率与几何平均收益率",
+    "name": "几何平均收益率",
+    "formula": "= \\left[(1+R_1) \\times (1+R_2) \\times \\dots \\times (1+R_T)\\right]^{1/T} - 1",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "方差与标准差",
+    "name": "方差",
+    "formula": "\\sigma^2 = \\mathrm{Var}(R) = \\frac{1}{T-1} \\sum_{i=1}^{n} (R_i - \\bar{R})^2",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "方差与标准差",
+    "name": "标准差",
+    "formula": "\\sigma = SD(R) = \\sqrt{\\frac{1}{T-1} \\sum_{i=1}^{n} (R_i - \\bar{R})^2}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "单个证券的期望收益、协方差、相关系数",
+    "name": "期望收益",
+    "formula": "\\bar{R} = \\frac{1}{n} \\sum_{t=1}^{T} R_t",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "单个证券的期望收益、协方差、相关系数",
+    "name": "协方差",
+    "formula": "\\sigma_{AB} = Cov(R_A, R_B) = E[(R_{Ai} - \\bar{R}_A)(R_{Bi} - \\bar{R}_B)]",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "单个证券的期望收益、协方差、相关系数",
+    "name": "协方差",
+    "formula": "Cov(r_D, r_E) = \\rho_{DE} \\sigma_D \\sigma_E",
+    "description": "或者："
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "单个证券的期望收益、协方差、相关系数",
+    "name": "相关系数",
+    "formula": "\\rho_{AB} = Corr(R_A, R_B) = \\frac{Cov(R_A, R_B)}{\\sigma_A \\sigma_B}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "投资组合的期望收益、方差和协方差",
+    "name": "组合的期望收益",
+    "formula": "\\bar{R}_P = W_D \\bar{R}_D + W_E \\bar{R}_E",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "投资组合的期望收益、方差和协方差",
+    "name": "组合的方差",
+    "formula": "Var(\\text{组合}) = W_D^2 \\sigma_D^2 + 2W_D W_E \\sigma_{D,E} + W_E^2 \\sigma_E^2",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "投资组合的期望收益、方差和协方差",
+    "name": "组合的方差",
+    "formula": "Var(\\text{组合}) = W_D^2 \\sigma_D^2 + 2W_D W_E \\sigma_D \\sigma_E \\rho_{DE} + W_E^2 \\sigma_E^2",
+    "description": "由于 $\\sigma_{DE} = \\rho_{DE} \\times \\sigma_D \\sigma_E$，所以："
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "投资组合的期望收益、方差和协方差",
+    "name": "组合的标准差",
+    "formula": "\\sigma_P = \\sqrt{W_D^2 \\sigma_D^2 + 2W_D W_E \\sigma_{D,E} + W_E^2 \\sigma_E^2}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "投资组合的期望收益、方差和协方差",
+    "name": "风险资产和无风险资产的组合",
+    "formula": "E(r_c) = y E(r_p) + (1-y) E(r_f) = r_f + y[E(r_p) - r_f]",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第三章-投资组合理论",
+    "fileTitle": "收益率统计量与两资产组合",
+    "group": "投资组合的期望收益、方差和协方差",
+    "name": "风险资产和无风险资产的组合",
+    "formula": "\\sigma_c^2 = y^2 \\sigma_p^2",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第四章-资产定价模型",
+    "fileTitle": "APT 套利定价理论",
+    "group": "APT 模型",
+    "name": "APT 模型",
+    "formula": "R = \\bar{R} + \\beta_I F_I + \\varepsilon",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第四章-资产定价模型",
+    "fileTitle": "APT 套利定价理论",
+    "group": "APT 模型",
+    "name": "APT 模型",
+    "formula": "R = \\bar{R} + \\beta_I F_I + \\beta_{GNP} F_{GNP} + \\beta_r F_r + \\varepsilon",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第四章-资产定价模型",
+    "fileTitle": "APT 套利定价理论",
+    "group": "APT 模型",
+    "name": "APT 模型",
+    "formula": "R = \\bar{R} + \\beta_1 F_1 + \\beta_2 F_2 + \\dots + \\beta_k F_k + \\varepsilon",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第四章-资产定价模型",
+    "fileTitle": "CAPM 与 SML 证券市场线",
+    "group": "CAPM 模型",
+    "name": "CAPM 模型",
+    "formula": "\\bar{R} = R_f + \\beta(\\bar{R}_m - R_f)",
+    "description": "某种证券或证券组合的期望收益："
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第四章-资产定价模型",
+    "fileTitle": "CAPM 与 SML 证券市场线",
+    "group": "CAPM 模型",
+    "name": "CAPM 模型",
+    "formula": "SML \\text{ 斜率} = \\frac{\\bar{R_m} - R_f}{\\beta_M} = \\frac{\\bar{R_m} - R_f}{1} = \\bar{R_m} - R_f",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "五大绩效评价指标",
+    "group": "投资组合业绩评价指标",
+    "name": "夏普比率",
+    "formula": "\\frac{\\bar{r}_P - \\bar{r}_f}{\\sigma_P}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "五大绩效评价指标",
+    "group": "投资组合业绩评价指标",
+    "name": "特雷纳测度",
+    "formula": "\\frac{\\bar{r}_P - \\bar{r}_f}{\\beta_P}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "五大绩效评价指标",
+    "group": "投资组合业绩评价指标",
+    "name": "詹森 $\\alpha$（投资组合 $\\alpha$）",
+    "formula": "\\alpha_p = \\bar{r_p} - \\left[\\bar{r}_f + \\beta_p(\\bar{r}_M - \\bar{r}_f)\\right]",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "五大绩效评价指标",
+    "group": "投资组合业绩评价指标",
+    "name": "信息比率（循迹误差）",
+    "formula": "\\frac{\\alpha_P}{\\sigma(e_P)}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "五大绩效评价指标",
+    "group": "投资组合业绩评价指标",
+    "name": "$M^2$ 测度",
+    "formula": "M^2 = r_{p^*} - r_M",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "单指数模型的公式",
+    "formula": "R_i(t) = \\alpha_i + \\beta_i R_M(t) + e_i(t)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "期望收益与 $\\beta$ 的关系",
+    "formula": "E(R_i) = \\alpha_i + \\beta_i E(R_M)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "单指数模型的风险和协方差",
+    "formula": "\\sigma_i^2 = \\beta_i^2 \\sigma_M^2 + \\sigma^2(e_i)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "单指数模型的风险和协方差",
+    "formula": "Cov(r_i, r_j) = \\beta_i \\beta_j \\sigma_M^2",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "单指数模型的风险和协方差",
+    "formula": "Corr(r_i, r_j) = \\frac{\\beta_i \\beta_j \\sigma_M^2}{\\sigma_i \\sigma_j} = Corr(r_i, r_M) \\times Corr(r_j, r_M)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "\\sigma_P^2 = \\beta_P^2 \\sigma_M^2 + \\sigma^2(e_P)",
+    "description": "资产组合的方差为："
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "w_i^0 = \\frac{\\alpha_i}{\\sigma^2(e_i)}",
+    "description": "系统性风险部分为 $\\beta_P^2 \\sigma_M^2$，非系统成分为 $\\sigma^2(e_P)$。"
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "w_i = \\frac{w_i^0}{\\displaystyle\\sum_{i=1}^{n} w_i^0}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "\\alpha_A = \\sum_{i=1}^{n} w_i \\alpha_i",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "\\sigma^2(e_A) = \\sum_{i=1}^{n} w_i^2 \\sigma^2(e_i)",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "w_A^0 = \\frac{\\alpha_A / \\sigma^2(e_A)}{E(R_M) / \\sigma_M^2}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "\\beta_A = \\sum_{i=1}^{n} w_i \\beta_i",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "w_A^* = \\frac{w_A^0}{1 + (1-\\beta_A) w_A^0}",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "S_P^2 = S_M^2 + \\left[\\frac{\\alpha_A}{\\sigma(e_A)}\\right]^2",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "W_M^* = 1 - W_A^* \\qquad W_i^* = W_A^* \\cdot w_i",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "E(R_P) = (W_M^* + W_A^* \\beta_A) E(R_M) + W_A^* \\alpha_A",
+    "description": ""
+  },
+  {
+    "subject": "投资学",
+    "chapter": "第五章-绩效评价",
+    "fileTitle": "单指数模型与 Treynor-Black 最优化",
+    "group": "指数模型",
+    "name": "指数模型与分散化",
+    "formula": "\\sigma_P^2 = (W_M^* + W_A^* \\beta_A)^2 \\sigma_M^2 + [W_A^* \\sigma(e_A)]^2",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第三章-债券与利率理论",
+    "fileTitle": "债券收益率与利率期限结构",
+    "group": "到期收益率",
+    "name": "到期收益率",
+    "formula": "P = \\frac{C}{(1+y)} + \\frac{C}{(1+y)^2} + \\dots + \\frac{C}{(1+y)^n} + \\frac{B}{(1+y)^n}",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第三章-债券与利率理论",
+    "fileTitle": "债券收益率与利率期限结构",
+    "group": "持有期收益率",
+    "name": "持有期收益率",
+    "formula": "HPR = \\frac{P_1 - P_0 + C}{P_0}",
+    "description": "P 为当前价格，C 为每期的利息，B 为最后偿还的本金，y 为到期收益率。 假设持有 1 年，则持有期收益率："
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第三章-债券与利率理论",
+    "fileTitle": "债券收益率与利率期限结构",
+    "group": "预期理论",
+    "name": "预期理论",
+    "formula": "y_n \\approx \\frac{\\sum_{j=1}^{n} E(r_j)}{n}",
+    "description": "其中 $P_0$ 表示债券的买入价格，$P_1$ 表示债券的卖出价格，C 表示期间收到的利息。 $\\dfrac{C}{P_0}$ 又称为**当期收益率**（收益中来自于利息收入的部分）；$\\dfrac{P_1 - P_0}{P_0}$ 又称为**资本利得率**（收益中来自于证券价格变动的部分）。"
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第三章-债券与利率理论",
+    "fileTitle": "债券收益率与利率期限结构",
+    "group": "流动性溢价理论",
+    "name": "流动性溢价理论",
+    "formula": "y_n \\approx \\frac{\\sum_{j=1}^{n} E(r_j)}{n} + LP_n \\quad (LP_n > 0)",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第三章-债券与利率理论",
+    "fileTitle": "利率敏感性缺口与久期缺口",
+    "group": "利率敏感性缺口",
+    "name": "利率敏感性缺口",
+    "formula": "\\text{缺口率} = \\left(\\text{利率敏感性资产} / \\text{利率敏感性负债}\\right) \\times 100\\%",
+    "description": "利率敏感性缺口 = 利率敏感性资产 − 利率敏感性负债。如果利率敏感性资产大于利率敏感性负债，则称之为**正缺口**，反之则是**负缺口**。"
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第三章-债券与利率理论",
+    "fileTitle": "利率敏感性缺口与久期缺口",
+    "group": "久期缺口",
+    "name": "久期缺口",
+    "formula": "D_A - \\frac{B}{A} \\times D_B",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "基础货币（B）",
+    "name": "基础货币（B）",
+    "formula": "M_S = B \\times m \\implies B = \\frac{M_S}{m}",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "货币乘数",
+    "name": "狭义货币乘数（$m_1$）",
+    "formula": "m_1 = \\frac{M_1}{B} = \\frac{C+D}{C+R} = \\frac{C+D}{C+RR+ER+TR}",
+    "description": "货币乘数 = 货币供应量 / 基础货币"
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "货币乘数",
+    "name": "狭义货币乘数（$m_1$）",
+    "formula": "= \\frac{\\dfrac{C}{D}+1}{\\dfrac{C}{D}+\\dfrac{RR}{D}+\\dfrac{ER}{D}+\\dfrac{TR}{T}\\times\\dfrac{T}{D}} = \\frac{1+c}{c+r_d+e+tr}",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "货币乘数",
+    "name": "广义货币乘数（$m_2$）",
+    "formula": "m_2 = \\frac{M_2}{B} = \\frac{C+D+T}{C+R} = \\frac{C+D+T}{C+RR+ER+TR}",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "货币乘数",
+    "name": "广义货币乘数（$m_2$）",
+    "formula": "= \\frac{1+\\dfrac{C}{D}+\\dfrac{T}{D}}{\\dfrac{C}{D}+\\dfrac{RR}{D}+\\dfrac{ER}{D}+\\dfrac{TR}{T}\\times\\dfrac{T}{D}} = \\frac{1+c+t}{c+r_d+e+tr_t}",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "存款乘数",
+    "name": "活期存款乘数",
+    "formula": "\\frac{D}{B} = \\frac{D}{C+R} = \\frac{D}{C+RR+ER+TR}",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "存款乘数",
+    "name": "活期存款乘数",
+    "formula": "= \\frac{1}{\\dfrac{C}{D}+\\dfrac{RR}{D}+\\dfrac{ER}{D}+\\dfrac{TR}{T}\\times\\dfrac{T}{D}} = \\frac{1}{c+r_d+e+tr_t}",
+    "description": ""
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "存款乘数",
+    "name": "定期存款乘数",
+    "formula": "= \\frac{T}{D} \\times \\frac{D}{B} = \\frac{t}{c+r_d+e+tr}",
+    "description": "定期存款乘数 = T（定期存款）/ B（原始存款）"
+  },
+  {
+    "subject": "货币银行学",
+    "chapter": "第四章-货币供给理论",
+    "fileTitle": "货币乘数与存款乘数",
+    "group": "存款乘数",
+    "name": "总存款乘数",
+    "formula": "= \\frac{D}{B} + \\frac{T}{B} = \\frac{1+t}{c+r_d+e+tr_t}",
+    "description": "总存款乘数 = (D+T)（活期存款 + 定期存款）/ B（原始存款）"
+  },
+  {
+    "subject": "国际金融",
+    "chapter": "第二章-汇率决定理论",
+    "fileTitle": "利率平价理论",
+    "group": "利率平价理论",
+    "name": "套补利率平价",
+    "formula": "f = e \\times \\left(\\frac{1+i}{1+i^*}\\right)^t",
+    "description": ""
+  },
+  {
+    "subject": "国际金融",
+    "chapter": "第二章-汇率决定理论",
+    "fileTitle": "利率平价理论",
+    "group": "利率平价理论",
+    "name": "非套补利率平价",
+    "formula": "E_{e_f} = e \\times \\left(\\frac{1+i}{1+i^*}\\right)^t",
+    "description": "其中 f 和 e 分别表示远期汇率（t 期）和即期汇率，i 和 i\\* 分别表示国内利率和国外利率，t 表示期数。"
+  },
+  {
+    "subject": "国际金融",
+    "chapter": "第二章-汇率决定理论",
+    "fileTitle": "汇率基础与购买力平价",
+    "group": "名义汇率与实际汇率",
+    "name": "名义汇率与实际汇率",
+    "formula": "q = \\frac{e p^*}{p}",
+    "description": ""
+  },
+  {
+    "subject": "国际金融",
+    "chapter": "第二章-汇率决定理论",
+    "fileTitle": "汇率基础与购买力平价",
+    "group": "购买力平价理论",
+    "name": "绝对购买力平价",
+    "formula": "e = \\frac{p}{p^*}",
+    "description": "其中 q 是实际汇率，e 是名义汇率，P、P\\* 为国内和国外价格水平。 ① 名义汇率取决于两国（可贸易品）物价水平之比："
+  },
+  {
+    "subject": "国际金融",
+    "chapter": "第二章-汇率决定理论",
+    "fileTitle": "汇率基础与购买力平价",
+    "group": "购买力平价理论",
+    "name": "相对购买力平价",
+    "formula": "e_t = e_0 \\times \\frac{p_t / p_0}{p_t^* / p_0^*}",
+    "description": "② 实际汇率稳定为 1（q = 1） ① 名义汇率："
+  },
+  {
+    "subject": "国际金融",
+    "chapter": "第二章-汇率决定理论",
+    "fileTitle": "汇率基础与购买力平价",
+    "group": "购买力平价理论",
+    "name": "相对购买力平价",
+    "formula": "q_t = \\left(e_0 \\times \\frac{P_t / P_0}{P_t^* / P_0^*}\\right) \\times \\frac{P_t^*}{P_t} = \\frac{e_0 P_0^*}{P_0} = q_0",
+    "description": "其中 $e_t$、$e_0$ 分别表示第 t 期和第 0 期（基期）的名义汇率；$p_t$、$p_0$ 分别表示本国第 t 期和第 0 期的价格水平；$p_t^*$、$p_0^*$ 分别表示外国第 t 期和第 0 期的价格水平。 ② 实际汇率："
+  }
+];
+
   /* ===== 2. 亮/暗色主题管理 ===== */
   const themeBtn = document.getElementById("themeBtn");
   const themeSymbol = themeBtn.querySelector(".theme-symbol");
@@ -640,15 +2367,171 @@
     setTheme(currentTheme === "dark" ? "light" : "dark");
   });
 
-  /* ===== 3. 极速模糊检索系统 ===== */
+  /* ===== 3. 全局局部状态管理 ===== */
+  let currentTab = "knowledge"; // knowledge | formula
+  let currentSubjectFilter = "all";
+
   const searchInput = document.getElementById("searchInput");
   const clearInputBtn = document.getElementById("clearInputBtn");
   const hotTags = document.getElementById("hotTags");
   const sectionTitle = document.getElementById("sectionTitle");
   const countBadge = document.getElementById("countBadge");
   const categoryGrid = document.getElementById("categoryGrid");
+  const formulaContainer = document.getElementById("formulaContainer");
   const searchResults = document.getElementById("searchResults");
 
+  // Tab 切换控制
+  window.switchTab = function(tab) {
+    if (currentTab === tab) return;
+    currentTab = tab;
+
+    const tabKnowledge = document.getElementById("tabKnowledge");
+    const tabFormula = document.getElementById("tabFormula");
+
+    if (tab === "knowledge") {
+      tabKnowledge.classList.add("active");
+      tabFormula.classList.remove("active");
+      
+      // 切换视图
+      if (searchInput.value.trim() === "") {
+        categoryGrid.style.display = "grid";
+        formulaContainer.style.display = "none";
+        searchResults.style.display = "none";
+        sectionTitle.textContent = "核心知识导航 (Default View)";
+        countBadge.textContent = "4 章节";
+        countBadge.className = "count-badge";
+      } else {
+        performSearch();
+      }
+    } else {
+      tabFormula.classList.add("active");
+      tabKnowledge.classList.remove("active");
+
+      // 切换视图
+      if (searchInput.value.trim() === "") {
+        categoryGrid.style.display = "none";
+        formulaContainer.style.display = "block";
+        searchResults.style.display = "none";
+        renderFormulaGrid();
+      } else {
+        performSearch();
+      }
+    }
+  };
+
+  // 根据当前过滤器筛选公式数据
+  function getFilteredFormulasBySubject() {
+    if (currentSubjectFilter === "all") {
+      return FORMULA_DATABASE;
+    }
+    return FORMULA_DATABASE.filter(item => item.subject === currentSubjectFilter);
+  }
+
+  // 渲染公式卡片网络
+  function renderFormulaGrid(filteredFormulas = null) {
+    const formulaGrid = document.getElementById("formulaGrid");
+    const formulasToRender = filteredFormulas || getFilteredFormulasBySubject();
+
+    if (formulasToRender.length === 0) {
+      formulaGrid.innerHTML = `
+        <div class="no-results" style="grid-column: 1 / -1;">
+          <div class="emoji">🔍</div>
+          <p>未找到符合条件的公式。您可以尝试切换学科标签或精简搜索词</p>
+        </div>
+      `;
+      
+      if (searchInput.value.trim() === "") {
+        sectionTitle.textContent = `公式速查中心 (${currentSubjectFilter === 'all' ? '全部' : currentSubjectFilter})`;
+        countBadge.textContent = "0 公式";
+        countBadge.className = "count-badge count-zero";
+      }
+      return;
+    }
+
+    let html = "";
+    formulasToRender.forEach((item) => {
+      // Find the index of this formula in the main database to map copy action
+      const dbIndex = FORMULA_DATABASE.findIndex(f => f.name === item.name && f.formula === item.formula);
+      const mathDisplay = `$$${item.formula}$$`;
+      const descDisplay = item.description ? `<p class="formula-desc">${item.description}</p>` : "";
+
+      html += `
+        <div class="formula-card">
+          <div class="formula-card-meta">
+            <span class="formula-subject-badge">${item.subject}</span>
+            <span class="chapter-name" title="${item.chapter}">${item.chapter}</span>
+          </div>
+          <div class="formula-card-title">${item.name}</div>
+          <div class="formula-math-box">
+            <div class="math-content">${mathDisplay}</div>
+          </div>
+          ${descDisplay}
+          <div class="formula-card-actions">
+            <button class="copy-btn" type="button" onclick="copyFormula(this, ${dbIndex})">
+              <span>📋 复制 LaTeX</span>
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    formulaGrid.innerHTML = html;
+    
+    // 更新状态栏
+    if (searchInput.value.trim() === "") {
+      sectionTitle.textContent = `公式速查中心 (${currentSubjectFilter === 'all' ? '全部' : currentSubjectFilter})`;
+      countBadge.textContent = `${formulasToRender.length} 公式`;
+      countBadge.className = "count-badge";
+    }
+
+    // 触发 MathJax 渲染
+    if (window.MathJax) {
+      MathJax.typesetPromise([formulaGrid]).catch(function (err) {
+        console.error("MathJax render error:", err);
+      });
+    }
+  }
+
+  // 绑定学科过滤器点击事件
+  document.getElementById("formulaFilter").addEventListener("click", (e) => {
+    if (e.target.classList.contains("filter-tag")) {
+      const tags = document.querySelectorAll("#formulaFilter .filter-tag");
+      tags.forEach(t => t.classList.remove("active"));
+      
+      e.target.classList.add("active");
+      currentSubjectFilter = e.target.getAttribute("data-subject");
+      
+      if (searchInput.value.trim() !== "") {
+        performSearch();
+      } else {
+        renderFormulaGrid();
+      }
+    }
+  });
+
+  // 复制 LaTeX 逻辑
+  window.copyFormula = function(btn, index) {
+    const item = FORMULA_DATABASE[index];
+    if (!item) return;
+
+    const textToCopy = `$$${item.formula}$$`;
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      const originalHtml = btn.innerHTML;
+      btn.innerHTML = "<span>✓ 已复制</span>";
+      btn.classList.add("copied");
+
+      setTimeout(() => {
+        btn.innerHTML = originalHtml;
+        btn.classList.remove("copied");
+      }, 1500);
+    }).catch(err => {
+      console.error("Failed to copy:", err);
+      alert("复制失败，请手动选择复制。");
+    });
+  };
+
+  /* ===== 4. 极速模糊检索系统 ===== */
   // 输入清除按钮显示逻辑
   function updateClearBtn() {
     if (searchInput.value.trim() !== "") {
@@ -658,74 +2541,107 @@
     }
   }
 
-  // 核心智能检索引擎
+  // 核心智能检索引擎 (双模式)
   function performSearch() {
     const query = searchInput.value.toLowerCase().trim();
     updateClearBtn();
 
     if (query === "") {
-      // 恢复默认视图（4章节网格）
-      categoryGrid.style.display = "grid";
-      searchResults.style.display = "none";
-      sectionTitle.textContent = "核心知识导航 (Default View)";
-      countBadge.textContent = "4 章节";
-      countBadge.className = "count-badge";
+      if (currentTab === "knowledge") {
+        categoryGrid.style.display = "grid";
+        formulaContainer.style.display = "none";
+        searchResults.style.display = "none";
+        sectionTitle.textContent = "核心知识导航 (Default View)";
+        countBadge.textContent = "4 章节";
+        countBadge.className = "count-badge";
+      } else {
+        categoryGrid.style.display = "none";
+        formulaContainer.style.display = "block";
+        searchResults.style.display = "none";
+        renderFormulaGrid();
+      }
       return;
     }
 
-    // 多词汇分割匹配 (支持输入 "roe npvgo" 多个组合过滤)
     const terms = query.split(/\s+/);
-    
-    // 过滤出匹配项
-    const matches = KNOWLEDGE_INDEX.filter(item => {
-      return terms.every(term => {
-        return (
-          item.title.toLowerCase().includes(term) ||
-          item.category.toLowerCase().includes(term) ||
-          item.desc.toLowerCase().includes(term) ||
-          item.keywords.toLowerCase().includes(term)
-        );
+
+    if (currentTab === "knowledge") {
+      // 知识库模糊匹配
+      categoryGrid.style.display = "none";
+      formulaContainer.style.display = "none";
+      searchResults.style.display = "flex";
+      
+      const matches = KNOWLEDGE_INDEX.filter(item => {
+        return terms.every(term => {
+          return (
+            item.title.toLowerCase().includes(term) ||
+            item.category.toLowerCase().includes(term) ||
+            item.desc.toLowerCase().includes(term) ||
+            item.keywords.toLowerCase().includes(term)
+          );
+        });
       });
-    });
 
-    // 渲染结果列表
-    categoryGrid.style.display = "none";
-    searchResults.style.display = "flex";
-    sectionTitle.textContent = "知识点检索结果 (Filtered Results)";
-    countBadge.textContent = `${matches.length} 条符合`;
-    countBadge.className = matches.length > 0 ? "count-badge" : "count-badge count-zero";
+      sectionTitle.textContent = "知识点检索结果 (Filtered Results)";
+      countBadge.textContent = `${matches.length} 条符合`;
+      countBadge.className = matches.length > 0 ? "count-badge" : "count-badge count-zero";
 
-    if (matches.length === 0) {
-      searchResults.innerHTML = `
-        <div class="no-results">
-          <div class="emoji">🔍</div>
-          <p>未找到符合 "${query}" 的知识点。请尝试其他拼音首字母或缩写 (如 roe, ddm, mpt)...</p>
-        </div>
-      `;
-      return;
-    }
-
-    // 构造卡片列表 HTML
-    let html = "";
-    matches.forEach(item => {
-      html += `
-        <a class="result-card" href="${item.link}">
-          <div class="result-info">
-            <div class="result-meta">
-              <span class="result-category-badge c-${item.category}">${item.category}</span>
-            </div>
-            <div class="result-title">${item.title}</div>
-            <div class="result-desc">${item.desc}</div>
+      if (matches.length === 0) {
+        searchResults.innerHTML = `
+          <div class="no-results">
+            <div class="emoji">🔍</div>
+            <p>未找到符合 "${query}" 的知识点。请尝试其他拼音首字母或缩写 (如 roe, ddm, mpt)...</p>
           </div>
-          <button class="result-jump" type="button">极速直达 ➔</button>
-        </a>
-      `;
-    });
-    searchResults.innerHTML = html;
-    if (window.MathJax) {
-      MathJax.typesetPromise([searchResults]).catch(function (err) {
-        console.error(err);
+        `;
+        return;
+      }
+
+      let html = "";
+      matches.forEach(item => {
+        html += `
+          <a class="result-card" href="${item.link}">
+            <div class="result-info">
+              <div class="result-meta">
+                <span class="result-category-badge c-${item.category}">${item.category}</span>
+              </div>
+              <div class="result-title">${item.title}</div>
+              <div class="result-desc">${item.desc}</div>
+            </div>
+            <button class="result-jump" type="button">极速直达 ➔</button>
+          </a>
+        `;
       });
+      searchResults.innerHTML = html;
+      
+      if (window.MathJax) {
+        MathJax.typesetPromise([searchResults]).catch(function (err) {
+          console.error("MathJax result render error:", err);
+        });
+      }
+    } else {
+      // 公式库模糊匹配
+      categoryGrid.style.display = "none";
+      formulaContainer.style.display = "block";
+      searchResults.style.display = "none";
+
+      const subjectFormulas = getFilteredFormulasBySubject();
+      const matches = subjectFormulas.filter(item => {
+        return terms.every(term => {
+          return (
+            item.name.toLowerCase().includes(term) ||
+            item.subject.toLowerCase().includes(term) ||
+            item.chapter.toLowerCase().includes(term) ||
+            item.formula.toLowerCase().includes(term) ||
+            (item.description && item.description.toLowerCase().includes(term))
+          );
+        });
+      });
+
+      renderFormulaGrid(matches);
+
+      sectionTitle.textContent = "公式检索结果 (Filtered Results)";
+      countBadge.textContent = `${matches.length} 条符合`;
+      countBadge.className = matches.length > 0 ? "count-badge" : "count-badge count-zero";
     }
   }
 
