@@ -576,12 +576,24 @@
     border-radius: 8px;
     padding: 14px;
     margin-bottom: 12px;
-    overflow-x: auto;
+    overflow: hidden; /* 杜绝任何滚轴与溢出 */
     border: 1px solid var(--rule-soft);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 70px;
+  }
+
+  /* 强行使 MathJax 渲染出的 SVG 公式自适应等比例缩放 */
+  .formula-math-box mjx-container[jax="SVG"] {
+    max-width: 100% !important;
+    overflow: visible !important;
+    display: inline-block;
+  }
+  .formula-math-box mjx-container[jax="SVG"] > svg {
+    max-width: 100% !important;
+    height: auto !important;
+    min-width: 0;
   }
 
   .formula-desc {
