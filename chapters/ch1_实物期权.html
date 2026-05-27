@@ -24,8 +24,8 @@
     --ink-mute:    #918a7c;   /* 弱化文字 */
     --rule:        #e0ddd3;   /* 分隔线 */
     --rule-soft:   #ecebe4;   /* 浅分隔 */
-    --accent:      #4a6b4f;   /* 墨绿 主强调 */
-    --accent-soft: #dde6da;   /* 墨绿浅底 */
+    --accent:      #2a2620;   /* （已去墨绿，退化为正文 ink） */
+    --accent-soft: #efece6;   /* （已去墨绿，退化为中性灰浅底） */
     --warn:        #a04830;   /* 赭红 关键数 */
     --warn-soft:   #f0d8cd;
     --gold:        #a07a3c;   /* 沙金 公式条（略深更稳） */
@@ -43,8 +43,8 @@
     --ink-mute:    #8a7d63;
     --rule:        #3d3527;
     --rule-soft:   #332d22;
-    --accent:      #a8c4a0;
-    --accent-soft: #3a4536;
+    --accent:      #e8dfca;
+    --accent-soft: #2e2b27;
     --warn:        #e0a080;
     --warn-soft:   #4a342a;
     --gold:        #d4a857;
@@ -433,9 +433,9 @@
   /* 行内结论徽章 */
   .res {
     display: inline-block;
-    background: #edf3ed;
-    color: #2f5739;
-    border: 1px solid #b9cbbd;
+    background: #efece6;
+    color: #2a2620;
+    border: 1px solid #cfcdc6;
     padding: 1px 9px;
     border-radius: 3px;
     font-weight: 600;
@@ -2547,9 +2547,9 @@
 
   body.print-preview.print-color .qhead .qnum,
   body.printing.print-color .qhead .qnum {
-    color: #4a6b4f !important;
+    color: #2a2620 !important;
     background: transparent !important;
-    border: 0.7pt solid #4a6b4f !important;
+    border: 0.7pt solid #2a2620 !important;
   }
 
   body.print-preview.print-bw .qhead .qnum,
@@ -2648,10 +2648,10 @@
     display: inline-block;
     min-width: 13pt;
     padding: 0 4pt !important;
-    border: 0.6pt solid #b9cbbd !important;
+    border: 0.6pt solid #cfcdc6 !important;
     border-radius: 2pt !important;
-    color: #2f5739 !important;
-    background: #edf3ed !important;
+    color: #2a2620 !important;
+    background: #efece6 !important;
     text-decoration: none !important;
     text-align: center;
   }
@@ -2724,9 +2724,9 @@
     margin: 8pt 0 8pt 12pt !important; /* 轻轻缩进 12pt */
     padding: 6pt 10pt !important;
     border: none !important;
-    background: #edf3ed !important; /* 极薄优雅的墨绿底色 */
+    background: #efece6 !important; /* 极薄优雅的墨绿底色 */
     border-radius: 6px !important;
-    color: #2f5739 !important; /* 沉稳的墨绿文字 */
+    color: #2a2620 !important; /* 沉稳的墨绿文字 */
     font-size: 9.8pt !important;
     line-height: 1.6 !important;
   }
@@ -2735,7 +2735,7 @@
   body.printing .hint::before {
     content: "💡 [思路] " !important;
     font-weight: 800;
-    color: #2f5739 !important;
+    color: #2a2620 !important;
     margin-right: 4pt;
   }
 
