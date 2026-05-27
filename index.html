@@ -2063,6 +2063,66 @@
   .tl-phase.lo  { border-color: var(--gold);   color: var(--gold);   }
   .tl-phase.ph0 { border-color: transparent; color: transparent; }
 
+  /* 考试型现金流时间轴：固定 SVG 坐标，避免公式渲染造成错位 */
+  .exam-timeline {
+    margin: 12px 0 18px;
+    padding: 6px 0 2px;
+  }
+  .exam-timeline > svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    font-family: Georgia, "Times New Roman", "Songti SC", "Noto Serif CJK SC", serif;
+  }
+  .exam-timeline .axis-line,
+  .exam-timeline .stage-line {
+    stroke: var(--ink);
+    stroke-width: 1.6;
+    vector-effect: non-scaling-stroke;
+  }
+  .exam-timeline .stage-line {
+    stroke: var(--rule);
+    stroke-width: 1.1;
+  }
+  .exam-timeline .stage-line.growth { stroke: var(--accent); }
+  .exam-timeline .stage-line.stable { stroke: var(--gold); }
+  .exam-timeline .tick {
+    fill: var(--bg-elev);
+    stroke: var(--ink);
+    stroke-width: 1.8;
+    vector-effect: non-scaling-stroke;
+  }
+  .exam-timeline .tick.key {
+    fill: var(--warn);
+    stroke: var(--warn);
+  }
+  .exam-timeline .tl-label {
+    fill: var(--ink);
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .exam-timeline .tl-label.muted {
+    fill: var(--ink-mute);
+    font-weight: 650;
+  }
+  .exam-timeline .tl-label.key {
+    fill: var(--warn);
+    font-weight: 800;
+  }
+  .exam-timeline .tl-year {
+    fill: var(--ink-soft);
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .exam-timeline .tl-stage {
+    fill: var(--ink-mute);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .exam-timeline .tl-stage.growth { fill: var(--accent); }
+  .exam-timeline .tl-stage.stable { fill: var(--gold); }
+
   /* ===== 知识点链条 ===== */
   .chain {
     display: flex; align-items: center; gap: 6px;
@@ -2973,46 +3033,34 @@ t=0         t=1（确定收30万，再决策）          t=2 ~ t=10
 
           <!-- 时间轴 -->
           <h3 class="sub">现金流时间轴</h3>
-          <div class="timeline">
-            <div class="tl-scroll">
-              <div class="tl-inner">
-                <!-- t=0 -->
-                <div class="tl-node">
-                  <div class="tl-top muted">\(D_0=1\)<br><span style="font-size:10px;">已发放</span></div>
-                  <div class="tl-dot"></div>
-                  <div class="tl-bot">0</div>
-                </div>
-                <!-- t=1 -->
-                <div class="tl-node">
-                  <div class="tl-top accent">\(D_1\)<br>=1.25</div>
-                  <div class="tl-dot accent"></div>
-                  <div class="tl-bot">1</div>
-                </div>
-                <!-- t=2 -->
-                <div class="tl-node">
-                  <div class="tl-top accent">\(D_2\)<br>=1.5625</div>
-                  <div class="tl-dot accent"></div>
-                  <div class="tl-bot">2</div>
-                </div>
-                <!-- t=3 -->
-                <div class="tl-node">
-                  <div class="tl-top warn">\(D_3\)=1.953<br>+\(V_3\)=13.67</div>
-                  <div class="tl-dot warn"></div>
-                  <div class="tl-bot">3</div>
-                </div>
-                <!-- t=4... -->
-                <div class="tl-node">
-                  <div class="tl-top muted">\(D_4,D_5\cdots\)<br>g=5%永续</div>
-                  <div class="tl-dot muted"></div>
-                  <div class="tl-bot muted">4,5…∞</div>
-                </div>
-              </div>
-            </div>
-            <div class="tl-phases">
-              <div class="tl-phase ph0" style="flex:1;"></div>
-              <div class="tl-phase hi" style="flex:3;">↑↑ 高增长阶段 g₁=25%</div>
-              <div class="tl-phase lo" style="flex:2;">→ 稳定增长 g₂=5%</div>
-            </div>
+          <div class="exam-timeline">
+            <svg viewBox="0 0 760 148" role="img" aria-label="两阶段股利折现时间轴">
+              <line class="axis-line" x1="42" y1="56" x2="714" y2="56"></line>
+              <polygon points="714,56 700,48 700,64" fill="currentColor"></polygon>
+              <text class="tl-label muted" x="58" y="30" text-anchor="middle">D₀=1</text>
+              <text class="tl-label muted" x="58" y="48" text-anchor="middle">已发</text>
+              <circle class="tick" cx="58" cy="88" r="6"></circle>
+              <text class="tl-year" x="58" y="110" text-anchor="middle">0</text>
+              <text class="tl-label" x="214" y="38" text-anchor="middle">D₁</text>
+              <circle class="tick" cx="214" cy="88" r="6"></circle>
+              <text class="tl-year" x="214" y="110" text-anchor="middle">1</text>
+              <text class="tl-label" x="370" y="38" text-anchor="middle">D₂</text>
+              <circle class="tick" cx="370" cy="88" r="6"></circle>
+              <text class="tl-year" x="370" y="110" text-anchor="middle">2</text>
+              <text class="tl-label key" x="526" y="38" text-anchor="middle">D₃ + V₃</text>
+              <circle class="tick key" cx="526" cy="88" r="7"></circle>
+              <text class="tl-year" x="526" y="110" text-anchor="middle">3</text>
+              <text class="tl-label muted" x="682" y="30" text-anchor="middle">D₄,D₅,...</text>
+              <text class="tl-label muted" x="682" y="48" text-anchor="middle">g₂</text>
+              <circle class="tick" cx="682" cy="88" r="6"></circle>
+              <text class="tl-year" x="682" y="110" text-anchor="middle">4...∞</text>
+              <line class="stage-line" x1="42" y1="118" x2="112" y2="118"></line>
+              <text class="tl-stage" x="77" y="140" text-anchor="middle">不进 P₀</text>
+              <line class="stage-line growth" x1="142" y1="118" x2="560" y2="118"></line>
+              <text class="tl-stage growth" x="351" y="140" text-anchor="middle">高增长期 g₁=25%</text>
+              <line class="stage-line stable" x1="590" y1="118" x2="714" y2="118"></line>
+              <text class="tl-stage stable" x="652" y="140" text-anchor="middle">稳定期 g₂=5%</text>
+            </svg>
           </div>
 
           <!-- (1) -->
@@ -3356,22 +3404,35 @@ t=0         t=1（确定收30万，再决策）          t=2 ~ t=10
         <div class="solution-stream">
 
           <!-- 时间轴 -->
-          <div class="timeline" style="margin:0 0 20px;">
-            <div class="tl-scroll">
-              <div class="tl-inner">
-                <div class="tl-node"><div class="tl-top muted">$V_0$<br><span style="font-size:10px;">求价</span></div><div class="tl-dot"></div><div class="tl-bot">0</div></div>
-                <div class="tl-node"><div class="tl-top warn">投入 1.60<br>$D_1=6.65$</div><div class="tl-dot warn"></div><div class="tl-bot">1</div></div>
-                <div class="tl-node"><div class="tl-top accent">+2.10<br>$D_2=10.35$</div><div class="tl-dot accent"></div><div class="tl-bot">2</div></div>
-                <div class="tl-node"><div class="tl-top accent">+2.45<br>$D_3=10.70$</div><div class="tl-dot accent"></div><div class="tl-bot">3</div></div>
-                <div class="tl-node"><div class="tl-top muted">恢复 8.25<br>永续</div><div class="tl-dot muted"></div><div class="tl-bot muted">4…∞</div></div>
-              </div>
-            </div>
-            <div class="tl-phases">
-              <div class="tl-phase ph0" style="flex:1;"></div>
-              <div class="tl-phase warn" style="flex:1; background:var(--warn-soft); color:var(--warn);">投资期</div>
-              <div class="tl-phase hi" style="flex:2;">项目效益</div>
-              <div class="tl-phase lo" style="flex:1;">恢复永续</div>
-            </div>
+          <div class="exam-timeline">
+            <svg viewBox="0 0 760 148" role="img" aria-label="有限期 NPVGO 时间轴">
+              <line class="axis-line" x1="42" y1="56" x2="714" y2="56"></line>
+              <polygon points="714,56 700,48 700,64" fill="currentColor"></polygon>
+              <text class="tl-label muted" x="58" y="30" text-anchor="middle">V₀</text>
+              <text class="tl-label muted" x="58" y="48" text-anchor="middle">求价</text>
+              <circle class="tick" cx="58" cy="88" r="6"></circle>
+              <text class="tl-year" x="58" y="110" text-anchor="middle">0</text>
+              <text class="tl-label key" x="214" y="30" text-anchor="middle">投资 1.60</text>
+              <text class="tl-label key" x="214" y="48" text-anchor="middle">D₁</text>
+              <circle class="tick key" cx="214" cy="88" r="7"></circle>
+              <text class="tl-year" x="214" y="110" text-anchor="middle">1</text>
+              <text class="tl-label" x="370" y="38" text-anchor="middle">D₂</text>
+              <circle class="tick" cx="370" cy="88" r="6"></circle>
+              <text class="tl-year" x="370" y="110" text-anchor="middle">2</text>
+              <text class="tl-label" x="526" y="38" text-anchor="middle">D₃</text>
+              <circle class="tick" cx="526" cy="88" r="6"></circle>
+              <text class="tl-year" x="526" y="110" text-anchor="middle">3</text>
+              <text class="tl-label muted" x="682" y="30" text-anchor="middle">恢复 8.25</text>
+              <text class="tl-label muted" x="682" y="48" text-anchor="middle">永续</text>
+              <circle class="tick" cx="682" cy="88" r="6"></circle>
+              <text class="tl-year" x="682" y="110" text-anchor="middle">4...∞</text>
+              <line class="stage-line" x1="42" y1="118" x2="112" y2="118"></line>
+              <text class="tl-stage" x="77" y="140" text-anchor="middle">当前估值</text>
+              <line class="stage-line stable" x1="164" y1="118" x2="264" y2="118"></line>
+              <text class="tl-stage stable" x="214" y="140" text-anchor="middle">投资发生</text>
+              <line class="stage-line growth" x1="298" y1="118" x2="714" y2="118"></line>
+              <text class="tl-stage growth" x="506" y="140" text-anchor="middle">项目效益期</text>
+            </svg>
           </div>
 
           <div class="qblock">
@@ -4137,21 +4198,34 @@ t=0         t=1（确定收30万，再决策）          t=2 ~ t=10
         </div>
         <div class="hint">在 $t=9$ 时点，$D_{10}$ 是"下一期"股利，用戈登公式定出 $P_9$，再将 $P_9$ 一次性折回 $t=0$。</div>
 
-        <div class="timeline" style="margin:10px 0;">
-          <div class="tl-scroll">
-            <div class="tl-inner">
-              <div class="tl-node"><div class="tl-top warn">$P_0$<br><span style="font-size:10px;">?</span></div><div class="tl-dot warn"></div><div class="tl-bot">0</div></div>
-              <div class="tl-node"><div class="tl-top muted">无股利<br><span style="font-size:10px;">D=0</span></div><div class="tl-dot muted"></div><div class="tl-bot muted">1–9</div></div>
-              <div class="tl-node"><div class="tl-top accent">$P_9$<br>=80元</div><div class="tl-dot accent"></div><div class="tl-bot">9</div></div>
-              <div class="tl-node"><div class="tl-top accent">$D_{10}$<br>=8元</div><div class="tl-dot accent"></div><div class="tl-bot">10</div></div>
-              <div class="tl-node"><div class="tl-top muted">$g=6\%$<br>永续</div><div class="tl-dot muted"></div><div class="tl-bot muted">11…∞</div></div>
-            </div>
-          </div>
-          <div class="tl-phases">
-            <div class="tl-phase ph0" style="flex:1;"></div>
-            <div class="tl-phase" style="flex:2; border-color:var(--ink-mute); color:var(--ink-mute);">零股利期</div>
-            <div class="tl-phase hi" style="flex:2;">g = 6% 永续增长</div>
-          </div>
+        <div class="exam-timeline">
+          <svg viewBox="0 0 760 148" role="img" aria-label="零股利启动期时间轴">
+            <line class="axis-line" x1="42" y1="56" x2="714" y2="56"></line>
+            <polygon points="714,56 700,48 700,64" fill="currentColor"></polygon>
+            <text class="tl-label key" x="58" y="30" text-anchor="middle">P₀</text>
+            <text class="tl-label key" x="58" y="48" text-anchor="middle">?</text>
+            <circle class="tick key" cx="58" cy="88" r="7"></circle>
+            <text class="tl-year" x="58" y="110" text-anchor="middle">0</text>
+            <text class="tl-label muted" x="214" y="38" text-anchor="middle">D = 0</text>
+            <circle class="tick" cx="214" cy="88" r="6"></circle>
+            <text class="tl-year" x="214" y="110" text-anchor="middle">1-9</text>
+            <text class="tl-label key" x="370" y="38" text-anchor="middle">P₉</text>
+            <circle class="tick key" cx="370" cy="88" r="7"></circle>
+            <text class="tl-year" x="370" y="110" text-anchor="middle">9</text>
+            <text class="tl-label" x="526" y="38" text-anchor="middle">D₁₀ = 8</text>
+            <circle class="tick" cx="526" cy="88" r="6"></circle>
+            <text class="tl-year" x="526" y="110" text-anchor="middle">10</text>
+            <text class="tl-label muted" x="682" y="30" text-anchor="middle">g = 6%</text>
+            <text class="tl-label muted" x="682" y="48" text-anchor="middle">永续</text>
+            <circle class="tick" cx="682" cy="88" r="6"></circle>
+            <text class="tl-year" x="682" y="110" text-anchor="middle">11...∞</text>
+            <line class="stage-line" x1="42" y1="118" x2="112" y2="118"></line>
+            <text class="tl-stage" x="77" y="140" text-anchor="middle">求现值</text>
+            <line class="stage-line" x1="142" y1="118" x2="404" y2="118"></line>
+            <text class="tl-stage" x="273" y="140" text-anchor="middle">零股利期</text>
+            <line class="stage-line stable" x1="456" y1="118" x2="714" y2="118"></line>
+            <text class="tl-stage stable" x="585" y="140" text-anchor="middle">稳定增长期</text>
+          </svg>
         </div>
 
         <div class="steps">
@@ -4189,22 +4263,37 @@ t=0         t=1（确定收30万，再决策）          t=2 ~ t=10
         </div>
 
         <!-- 时间轴 -->
-        <div class="timeline" style="margin:10px 0 20px;">
-          <div class="tl-scroll">
-            <div class="tl-inner">
-              <div class="tl-node"><div class="tl-top muted">\(D_0{=}0.5\)<br><span style="font-size:10px;">已发放</span></div><div class="tl-dot"></div><div class="tl-bot">0</div></div>
-              <div class="tl-node"><div class="tl-top accent">\(D_1\)<br>=0.525</div><div class="tl-dot accent"></div><div class="tl-bot">1</div></div>
-              <div class="tl-node"><div class="tl-top accent">\(D_2\)<br>=0.551</div><div class="tl-dot accent"></div><div class="tl-bot">2</div></div>
-              <div class="tl-node"><div class="tl-top accent">\(D_3\)<br>=0.579</div><div class="tl-dot accent"></div><div class="tl-bot">3</div></div>
-              <div class="tl-node"><div class="tl-top warn">\(D_4\)=0.608<br>\(P_4\)=10元</div><div class="tl-dot warn"></div><div class="tl-bot">4</div></div>
-              <div class="tl-node"><div class="tl-top muted">\(g_2\) 永续<br>…</div><div class="tl-dot muted"></div><div class="tl-bot muted">5…∞</div></div>
-            </div>
-          </div>
-          <div class="tl-phases">
-            <div class="tl-phase ph0" style="flex:1;"></div>
-            <div class="tl-phase hi" style="flex:4;">↑↑ 高增长 g₁=5%</div>
-            <div class="tl-phase lo" style="flex:2;">→ g₂ 永续</div>
-          </div>
+        <div class="exam-timeline">
+          <svg viewBox="0 0 760 148" role="img" aria-label="反推稳定增长率时间轴">
+            <line class="axis-line" x1="42" y1="56" x2="714" y2="56"></line>
+            <polygon points="714,56 700,48 700,64" fill="currentColor"></polygon>
+            <text class="tl-label muted" x="58" y="30" text-anchor="middle">D₀=0.5</text>
+            <text class="tl-label muted" x="58" y="48" text-anchor="middle">已发</text>
+            <circle class="tick" cx="58" cy="88" r="6"></circle>
+            <text class="tl-year" x="58" y="110" text-anchor="middle">0</text>
+            <text class="tl-label" x="182" y="38" text-anchor="middle">D₁</text>
+            <circle class="tick" cx="182" cy="88" r="6"></circle>
+            <text class="tl-year" x="182" y="110" text-anchor="middle">1</text>
+            <text class="tl-label" x="306" y="38" text-anchor="middle">D₂</text>
+            <circle class="tick" cx="306" cy="88" r="6"></circle>
+            <text class="tl-year" x="306" y="110" text-anchor="middle">2</text>
+            <text class="tl-label" x="430" y="38" text-anchor="middle">D₃</text>
+            <circle class="tick" cx="430" cy="88" r="6"></circle>
+            <text class="tl-year" x="430" y="110" text-anchor="middle">3</text>
+            <text class="tl-label key" x="554" y="38" text-anchor="middle">D₄ + P₄</text>
+            <circle class="tick key" cx="554" cy="88" r="7"></circle>
+            <text class="tl-year" x="554" y="110" text-anchor="middle">4</text>
+            <text class="tl-label muted" x="682" y="30" text-anchor="middle">g₂</text>
+            <text class="tl-label muted" x="682" y="48" text-anchor="middle">永续</text>
+            <circle class="tick" cx="682" cy="88" r="6"></circle>
+            <text class="tl-year" x="682" y="110" text-anchor="middle">5...∞</text>
+            <line class="stage-line" x1="42" y1="118" x2="96" y2="118"></line>
+            <text class="tl-stage" x="69" y="140" text-anchor="middle">已发</text>
+            <line class="stage-line growth" x1="126" y1="118" x2="584" y2="118"></line>
+            <text class="tl-stage growth" x="355" y="140" text-anchor="middle">高增长期 g₁=5%</text>
+            <line class="stage-line stable" x1="616" y1="118" x2="714" y2="118"></line>
+            <text class="tl-stage stable" x="665" y="140" text-anchor="middle">g₂ 永续</text>
+          </svg>
         </div>
 
         <!-- (1) -->
@@ -4304,20 +4393,31 @@ t=0         t=1（确定收30万，再决策）          t=2 ~ t=10
         </div>
 
         <!-- 时间轴 -->
-        <div class="timeline" style="margin:10px 0 20px;">
-          <div class="tl-scroll">
-            <div class="tl-inner">
-              <div class="tl-node"><div class="tl-top muted">$V_0$<br><span style="font-size:10px;">求价</span></div><div class="tl-dot"></div><div class="tl-bot">0</div></div>
-              <div class="tl-node"><div class="tl-top warn">$D_1 = 0$<br>全部留存</div><div class="tl-dot warn"></div><div class="tl-bot">1</div></div>
-              <div class="tl-node"><div class="tl-top accent">$D_2 = E_2$<br>全额派息</div><div class="tl-dot accent"></div><div class="tl-bot">2</div></div>
-              <div class="tl-node"><div class="tl-top accent">$D_3 = E_3$<br>…</div><div class="tl-dot accent"></div><div class="tl-bot">3…∞</div></div>
-            </div>
-          </div>
-          <div class="tl-phases">
-            <div class="tl-phase ph0" style="flex:1;"></div>
-            <div class="tl-phase warn" style="flex:1; background:var(--warn-soft); color:var(--warn);">投资</div>
-            <div class="tl-phase hi" style="flex:2;">新盈利水平永续</div>
-          </div>
+        <div class="exam-timeline">
+          <svg viewBox="0 0 760 148" role="img" aria-label="留存投资与股利恢复时间轴">
+            <line class="axis-line" x1="42" y1="56" x2="714" y2="56"></line>
+            <polygon points="714,56 700,48 700,64" fill="currentColor"></polygon>
+            <text class="tl-label muted" x="58" y="30" text-anchor="middle">V₀</text>
+            <text class="tl-label muted" x="58" y="48" text-anchor="middle">求价</text>
+            <circle class="tick" cx="58" cy="88" r="6"></circle>
+            <text class="tl-year" x="58" y="110" text-anchor="middle">0</text>
+            <text class="tl-label key" x="266" y="30" text-anchor="middle">D₁ = 0</text>
+            <text class="tl-label key" x="266" y="48" text-anchor="middle">留存</text>
+            <circle class="tick key" cx="266" cy="88" r="7"></circle>
+            <text class="tl-year" x="266" y="110" text-anchor="middle">1</text>
+            <text class="tl-label" x="474" y="38" text-anchor="middle">D₂ = E₂</text>
+            <circle class="tick" cx="474" cy="88" r="6"></circle>
+            <text class="tl-year" x="474" y="110" text-anchor="middle">2</text>
+            <text class="tl-label" x="682" y="38" text-anchor="middle">D₃ = E₃,...</text>
+            <circle class="tick" cx="682" cy="88" r="6"></circle>
+            <text class="tl-year" x="682" y="110" text-anchor="middle">3...∞</text>
+            <line class="stage-line" x1="42" y1="118" x2="112" y2="118"></line>
+            <text class="tl-stage" x="77" y="140" text-anchor="middle">当前估值</text>
+            <line class="stage-line stable" x1="214" y1="118" x2="318" y2="118"></line>
+            <text class="tl-stage stable" x="266" y="140" text-anchor="middle">投资</text>
+            <line class="stage-line growth" x1="390" y1="118" x2="714" y2="118"></line>
+            <text class="tl-stage growth" x="552" y="140" text-anchor="middle">新盈利水平永续</text>
+          </svg>
         </div>
 
         <h3 class="sub">（1）ROE = 5%</h3>
