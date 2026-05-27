@@ -31,6 +31,8 @@
     --gold:        #a07a3c;   /* 沙金 公式条（略深更稳） */
     --gold-soft:   #ede4cc;
     --formula-bg:  #f5f2e9;   /* 公式底 几乎中性 */
+    --neutral:      #6b6b66;   /* 中性灰 结构装饰（题号/占位/导语/侧栏） */
+    --neutral-soft: #efece6;   /* 中性灰浅底 */
   }
   [data-theme="dark"] {
     --bg:           #1f1b15;
@@ -48,6 +50,8 @@
     --gold:        #d4a857;
     --gold-soft:   #3a3022;
     --formula-bg:  #2a251c;
+    --neutral:      #9a948a;
+    --neutral-soft: #2e2b27;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -202,11 +206,11 @@
     padding: 12px 10px 14px;
     background: var(--bg-elev);
     border: 1px solid var(--rule-soft);
-    border-left: 3px solid var(--gold);
+    border-left: 3px solid var(--neutral);
     border-radius: 6px;
   }
   .quick-index .qtitle {
-    color: var(--gold);
+    color: var(--neutral);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.5px;
@@ -257,7 +261,6 @@
   }
   .chapter-lead {
     color: var(--ink-soft); font-size: 14px; margin-bottom: 30px;
-    padding-left: 12px; border-left: 3px solid var(--gold);
   }
 
   /* h2 / h3 */
@@ -332,9 +335,8 @@
     color: var(--ink); margin-bottom: 14px;
   }
   .problem-panel .stem .k {
-    color: var(--warn); font-weight: 700;
-    background: var(--warn-soft);
-    padding: 0 4px; border-radius: 2px;
+    color: var(--gold); font-weight: 700;
+    border-bottom: 1.5px solid var(--gold-soft);
   }
   .problem-panel ol.subq {
     list-style: none; padding: 0; margin-top: 10px;
@@ -369,8 +371,8 @@
     border-bottom: 1px solid var(--rule-soft);
   }
   .qhead .qnum {
-    background: var(--gold-soft); color: var(--gold);
-    border: 1px solid var(--gold);
+    background: var(--neutral-soft); color: var(--neutral);
+    border: 1px solid var(--neutral);
     width: 26px; height: 26px; border-radius: 50%;
     text-align: center; line-height: 24px;
     font-weight: 700; font-size: 14px;
@@ -515,15 +517,15 @@
 
   /* 待补充占位 */
   .todo {
-    border: 1px dashed var(--gold);
-    background: var(--gold-soft);
+    border: 1px dashed var(--neutral);
+    background: var(--neutral-soft);
     padding: 18px 20px;
     border-radius: 4px;
     color: var(--ink-soft);
     font-size: 14.5px;
     margin: 14px 0;
   }
-  .todo strong { color: var(--gold); }
+  .todo strong { color: var(--neutral); }
 
   /* 学习工具模块 */
   .study-dashboard {
@@ -588,12 +590,12 @@
     color: var(--ink);
   }
   .score-box {
-    background: var(--accent-soft);
-    border-left: 3px solid var(--accent);
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
     color: var(--ink);
   }
   .mistake-box strong { color: var(--warn); }
-  .score-box strong { color: var(--accent); }
+  .score-box strong { color: var(--gold); }
 
   table.formula-map {
     width: 100%;
@@ -661,7 +663,7 @@
     font-weight: 600;
   }
   .stat-done { background: var(--accent-soft); color: var(--accent); }
-  .stat-todo { background: var(--gold-soft); color: var(--gold); }
+  .stat-todo { background: var(--neutral-soft); color: var(--neutral); }
 
   /* MathJax微调 */
   mjx-container { font-size: 0.98em !important; }
@@ -768,7 +770,7 @@
       margin: 0 2px 0 0;
       font-size: 12px;
       letter-spacing: 1px;
-      color: var(--gold);
+      color: var(--neutral);
     }
     body:not(.print-preview):not(.printing) .quick-index a {
       display: inline-flex;
@@ -2975,31 +2977,31 @@
         <tbody>
           <tr>
             <td>股利固定不变</td>
-            <td><span class="exam-tag">固定股利模型</span></td>
+            <td><span class="res">固定股利模型</span></td>
             <td>\(P_0=\dfrac{D_1}{r_s}\)</td>
             <td>确认是永续固定股利，直接按永续年金定价。</td>
           </tr>
           <tr>
             <td>股利固定增长</td>
-            <td><span class="exam-tag">戈登增长模型</span></td>
+            <td><span class="res">戈登增长模型</span></td>
             <td>\(P_0=\dfrac{D_1}{r_s-g}\)</td>
             <td>先判断题目给的是 \(D_0\) 还是 \(D_1\)，若给 \(D_0\)，先乘 \(1+g\)。</td>
           </tr>
           <tr>
             <td>增长分阶段变化</td>
-            <td><span class="exam-tag gold">两阶段 DDM</span></td>
+            <td><span class="res gold">两阶段 DDM</span></td>
             <td>\(P_0=\sum\dfrac{D_t}{(1+r_s)^t}+\dfrac{P_n}{(1+r_s)^n}\)</td>
             <td>先画时间轴：前期逐年折现，稳定期用戈登公式算终值。</td>
           </tr>
           <tr>
             <td>题目强调盈利、留存、ROE</td>
-            <td><span class="exam-tag warn">NPVGO</span></td>
+            <td><span class="res warn">NPVGO</span></td>
             <td>\(V_0=\dfrac{E_1}{r_s}+NPVGO\)</td>
             <td>判断 \(ROE\) 与 \(r_s\)：只有 \(ROE>r_s\)，留存才创造股东财富。</td>
           </tr>
           <tr>
             <td>题目给 PE / EPS / 同行业倍数</td>
-            <td><span class="exam-tag">相对估值 PE</span></td>
+            <td><span class="res">相对估值 PE</span></td>
             <td>\(PE=\dfrac{P}{EPS}\)，\(\dfrac{1}{PE}=\dfrac{EPS}{P}\)</td>
             <td>先确认盈利口径：历史 \(E_0\)、预期 \(E_1\)、还是 TTM。</td>
           </tr>
