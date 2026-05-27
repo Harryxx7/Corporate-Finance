@@ -2765,8 +2765,8 @@
     border-color: #777 !important;
   }
 
-  /* ============ 习题三色视觉符号系统重构 ============ */
-  /* 1. 题干文本加粗加深，突出核心本体 */
+  /* ============ 习题与正文视觉心理符号系统重构 ============ */
+  /* 1. 题干及小题标题去黄色化，保持极简大气文字排版，配合墨绿/粉红视觉流 */
   .qblock > p:first-of-type {
     font-size: 11pt !important;
     line-height: 1.7 !important;
@@ -2775,23 +2775,22 @@
     font-weight: 500;
   }
   .qblock > p:first-of-type strong {
-    color: var(--accent) !important; /* “题干”二字为高贵墨绿 */
+    color: var(--accent) !important; /* “题干”二字为墨绿 */
     font-weight: 800;
   }
 
-  /* 2. 沙金考点徽章 (.qtitle) —— 起到画龙点睛的总纲指引作用 */
+  /* 彻底剥除题目小考点标题 (.qtitle) 的黄色底盒和边框，实现纯文字极简高雅 */
   body.print-preview .qhead .qtitle,
   body.printing .qhead .qtitle {
     display: inline-block !important;
-    padding: 2pt 8pt !important;
-    border: 0.8pt solid var(--gold) !important; /* 极细沙金线框 */
-    border-radius: 4px !important;
-    color: var(--gold) !important; /* 优雅的沙金字 */
-    background: var(--gold-soft) !important; /* 轻柔的浅沙金背景色块 */
+    color: var(--ink) !important; /* 经典深色字 */
     font-weight: 800 !important;
     font-size: 10.5pt !important;
     line-height: 1.4 !important;
-    box-shadow: 0 1px 3px rgba(160, 122, 60, 0.08) !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
   }
   body.print-preview .qhead,
   body.printing .qhead {
@@ -2801,9 +2800,9 @@
     gap: 6pt !important;
   }
 
-  /* 3. 墨绿正面思路 (.hint) —— 极细柔墨绿底色背景盒，代表破题生路 */
-  body.print-preview .qblock .hint,
-  body.printing .qblock .hint {
+  /* 2. 墨绿正面思路 (.hint) 全局换装（去 parent .qblock 限制，修复遗漏） */
+  body.print-preview .hint,
+  body.printing .hint {
     margin: 8pt 0 8pt 12pt !important; /* 轻轻缩进 12pt */
     padding: 6pt 10pt !important;
     border: none !important;
@@ -2813,16 +2812,16 @@
     font-size: 9.8pt !important;
     line-height: 1.6 !important;
   }
-  /* 为思路添加优雅的“💡 [思路]”墨绿前缀 */
-  body.print-preview .qblock .hint::before,
-  body.printing .qblock .hint::before {
+  /* 为所有思路添加优雅的“💡 [思路]”墨绿前缀 */
+  body.print-preview .hint::before,
+  body.printing .hint::before {
     content: "💡 [思路] " !important;
     font-weight: 800;
     color: #2f5739 !important;
     margin-right: 4pt;
   }
 
-  /* 步骤块 (.steps) 也进行柔和缩进和淡化 */
+  /* 步骤块 (.steps) 仅在习题块中缩进和淡化 */
   body.print-preview .qblock .steps,
   body.printing .qblock .steps {
     margin: 8pt 0 8pt 12pt !important;
@@ -2834,7 +2833,7 @@
     background: transparent !important;
   }
 
-  /* 4. 公式块自适应微调，轻微缩进 */
+  /* 3. 公式块仅在习题块中微调缩进 */
   body.print-preview .qblock .eq,
   body.printing .qblock .eq {
     margin: 6pt 0 8pt 12pt !important;
@@ -2843,10 +2842,10 @@
     background: transparent !important;
   }
 
-  /* 5. 粉红易错地雷 (.mistake-box) —— 坚守“无竖线标准”，微粉底色表示雷区警告 */
-  body.print-preview .qblock .mistake-box,
-  body.printing .qblock .mistake-box {
-    margin: 8pt 0 8pt 12pt !important; /* 同样右缩进 12pt */
+  /* 4. 粉红易错地雷 (.mistake-box) 全局换装（去 parent .qblock 限制，坚守无边框，修复遗漏） */
+  body.print-preview .mistake-box,
+  body.printing .mistake-box {
+    margin: 8pt 0 8pt 12pt !important; /* 同样缩进 12pt */
     padding: 6pt 10pt !important;
     border: none !important;
     background: #f7ece8 !important; /* 极其柔和微红背景 */
@@ -2855,20 +2854,22 @@
     font-size: 9.8pt !important;
     line-height: 1.6 !important;
   }
-  body.print-preview .qblock .mistake-box strong::before,
-  body.printing .qblock .mistake-box strong::before {
+  body.print-preview .mistake-box strong::before,
+  body.printing .mistake-box strong::before {
     content: "⚠️ [避坑警示] " !important;
     font-weight: 800;
     color: #a04830 !important;
     margin-right: 4pt;
   }
 
-  /* 6. 答案 (.res) 视觉彻底降噪 —— 抹除多余彩色背景 and 边框，隐形低调展示 */
-  body.print-preview .qblock .res,
-  body.printing .qblock .res {
+  /* 5. 答案 (.res) 视觉彻底降噪 —— 抹除所有彩色底盒与线框，在题目中隐形展示 */
+  body.print-preview .res,
+  body.printing .res,
+  body.print-preview .res.warn,
+  body.printing .res.warn {
     display: inline !important;
-    background: transparent !important; /* 去除色块 */
-    border: none !important; /* 去除任何边框 */
+    background: transparent !important; /* 彻底去除色块 */
+    border: none !important; /* 彻底去除任何边框 */
     color: #555 !important; /* 淡淡的灰色文字 */
     font-weight: 800 !important;
     font-size: 10.5pt !important;
@@ -2885,7 +2886,25 @@
     margin-bottom: 2pt !important;
   }
 
-</style>
+  /* 6. 将高贵沙金黄色系应用于正文“重点知识” (方案一的去竖线改良版) */
+  /* 子标题 (h3.sub) 去掉多余左边线竖条，使用高雅沙金小方块 ▪ 引导 */
+  body.print-preview h3.sub,
+  body.printing h3.sub {
+    color: var(--ink) !important;
+    border-left: none !important; /* 绝不要竖线 */
+    padding-left: 0 !important;
+    margin-top: 20px !important;
+    margin-bottom: 8px !important;
+  }
+  body.print-preview h3.sub::before,
+  body.printing h3.sub::before {
+    content: "▪ " !important;
+    color: var(--gold) !important; /* 优雅沙金小方块 */
+    font-weight: 900 !important;
+    margin-right: 6px !important;
+  }
+
+  </style>
 </head>
 <body class="print-preview print-color">
 <div class="preview-bar">
