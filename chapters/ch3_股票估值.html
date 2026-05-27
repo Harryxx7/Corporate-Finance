@@ -2765,6 +2765,88 @@
     border-color: #777 !important;
   }
 
+  /* ============ 习题层次感升级重构 (对标清华备考讲义风) ============ */
+  /* 1. 题干加粗加深，突出核心地位 */
+  .qblock > p:first-of-type {
+    font-size: 11pt !important;
+    line-height: 1.7 !important;
+    margin: 8pt 0 10pt !important;
+    color: #111 !important;
+    font-weight: 500;
+  }
+  .qblock > p:first-of-type strong {
+    color: var(--accent) !important; /* “题干”二字为高贵墨绿 */
+    font-weight: 800;
+  }
+
+  /* 2. 思路与步骤轻轻缩进，合理淡化，空出逻辑层级 */
+  body.print-preview .qblock .hint,
+  body.printing .qblock .hint,
+  body.print-preview .qblock .steps,
+  body.printing .qblock .steps {
+    margin: 8pt 0 8pt 12pt !important; /* 轻轻右移 */
+    padding: 0 !important;
+    color: #4a524a !important; /* 文字弱化 */
+    font-size: 9.8pt !important;
+    line-height: 1.6 !important;
+    border: none !important;
+    background: transparent !important;
+  }
+  /* 为思路添加优雅的“💡 [思路]”沙金前缀 */
+  body.print-preview .qblock .hint::before,
+  body.printing .qblock .hint::before {
+    content: "💡 [思路] " !important;
+    font-weight: 700;
+    color: var(--gold) !important;
+    margin-right: 4pt;
+  }
+
+  /* 3. 公式块自适应微调，轻微缩进 */
+  body.print-preview .qblock .eq,
+  body.printing .qblock .eq {
+    margin: 6pt 0 8pt 12pt !important;
+    padding: 2pt 0 !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  /* 4. 易错避坑盒重构：圆角红粉背景，红标警示，坚守“无竖线标准” */
+  body.print-preview .qblock .mistake-box,
+  body.printing .qblock .mistake-box {
+    margin: 8pt 0 8pt 12pt !important;
+    padding: 6pt 10pt !important;
+    border: none !important;
+    background: #f7ece8 !important; /* 极柔红背景 */
+    border-radius: 6px !important;
+    color: #8a3f2b !important;
+    font-size: 9.8pt !important;
+    line-height: 1.6 !important;
+  }
+  body.print-preview .qblock .mistake-box strong::before,
+  body.printing .qblock .mistake-box strong::before {
+    content: "⚠️ [避坑警示] " !important;
+    font-weight: 700;
+    color: #a04830 !important;
+    margin-right: 4pt;
+  }
+
+  /* 5. 答案小格子升级为高颜值“沙金考研印章” */
+  body.print-preview .qblock .res,
+  body.printing .qblock .res {
+    display: inline-block !important;
+    min-width: 22pt !important;
+    padding: 2pt 8pt !important;
+    border: 0.8pt solid var(--gold) !important; /* 极细沙金线 */
+    border-radius: 4px !important;
+    color: var(--gold) !important; /* 沙金字 */
+    background: var(--gold-soft) !important; /* 浅沙金背景 */
+    font-weight: 800 !important;
+    text-align: center;
+    margin-left: 4pt !important;
+    font-size: 10pt !important;
+    box-shadow: 0 1px 3px rgba(160, 122, 60, 0.08) !important;
+  }
+
 </style>
 </head>
 <body class="print-preview print-color">
